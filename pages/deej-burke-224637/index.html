@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deej Burke — DTC Marketer, Podcast Host, Cape Town Entrepreneur</title>
+  <meta name="description" content="Dylan 'Deej' Burke — DTC Media Buyer, Host of Growing Lean Podcast, Founder of ThirstyBird & Hello Clio. Based in Vredehoek, Cape Town.">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --navy:        #0a0e27;
+      --navy-light:  #0f1535;
+      --navy-mid:    #111630;
+      --navy-card:   #131840;
+      --teal:        #06b6d4;
+      --teal-dark:   #0891b2;
+      --teal-glow:   rgba(6,182,212,0.18);
+      --orange:      #f97316;
+      --orange-dark: #ea6c0a;
+      --orange-glow: rgba(249,115,22,0.18);
+      --white:       #f8fafc;
+      --gray:        #94a3b8;
+      --gray-light:  #cbd5e1;
+      --green:       #10b981;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--navy);
+      color: var(--white);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      overflow-x: hidden;
+      line-height: 1.65;
+    }
+
+    ::selection { background: var(--teal); color: var(--navy); }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--navy); }
+    ::-webkit-scrollbar-thumb { background: var(--teal); border-radius: 3px; }
+
+    /* ─────────────── NAV ─────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem 2.5rem;
+      background: rgba(10,14,39,0.80);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(6,182,212,0.08);
+      transition: padding 0.3s, border-color 0.3s;
+    }
+    nav.scrolled {
+      padding: 0.7rem 2.5rem;
+      border-bottom-color: rgba(6,182,212,0.22);
+    }
+
+    .nav-logo {
+      font-size: 1.55rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      background: linear-gradient(120deg, var(--teal), var(--orange));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2.25rem;
+    }
+    .nav-links a {
+      color: var(--gray);
+      text-decoration: none;
+      font-size: 0.83rem;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      transition: color 0.2s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0; right: 0;
+      height: 2px;
+      background: var(--teal);
+      border-radius: 2px;
+      transform: scaleX(0);
+      transition: transform 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--gray);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+
+    /* ─────────────── HERO ─────────────── */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    #particle-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+    }
+
+    /* gradient overlay so text is legible */
+    #hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(10,14,39,0.35) 0%, rgba(10,14,39,0.78) 100%);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 2rem 1.5rem;
+      max-width: 860px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(6,182,212,0.10);
+      border: 1px solid rgba(6,182,212,0.28);
+      color: var(--teal);
+      padding: 0.35rem 1.1rem;
+      border-radius: 100px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      margin-bottom: 1.75rem;
+      animation: fadeSlideDown 0.8s ease both;
+    }
+
+    .hero-name {
+      font-size: clamp(3rem, 9vw, 6.5rem);
+      font-weight: 900;
+      letter-spacing: -3px;
+      line-height: 0.95;
+      margin-bottom: 0.6rem;
+      animation: fadeSlideUp 0.8s ease 0.15s both;
+    }
+    .hero-name .gradient-text {
+      display: block;
+      background: linear-gradient(125deg, var(--teal) 0%, var(--orange) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: clamp(0.95rem, 2.2vw, 1.2rem);
+      color: var(--gray-light);
+      margin-bottom: 1.1rem;
+      font-weight: 400;
+      animation: fadeSlideUp 0.8s ease 0.25s both;
+    }
+
+    .typing-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      min-height: 2.8rem;
+      margin-bottom: 2.75rem;
+      animation: fadeSlideUp 0.8s ease 0.35s both;
+    }
+    .typing-prefix { color: var(--gray); font-size: clamp(1rem, 2.5vw, 1.45rem); font-weight: 400; }
+    #typing-text {
+      color: var(--orange);
+      font-size: clamp(1rem, 2.5vw, 1.45rem);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+    .cursor {
+      display: inline-block;
+      width: 3px;
+      height: 1.25em;
+      background: var(--orange);
+      border-radius: 2px;
+      vertical-align: middle;
+      margin-left: 1px;
+      animation: blink 1s step-end infinite;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeSlideUp 0.8s ease 0.45s both;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+      color: var(--white);
+      border: none;
+      padding: 0.9rem 2rem;
+      border-radius: 10px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s;
+      box-shadow: 0 4px 28px rgba(6,182,212,0.28);
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 40px rgba(6,182,212,0.45);
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: transparent;
+      color: var(--orange);
+      border: 2px solid var(--orange);
+      padding: 0.9rem 2rem;
+      border-radius: 10px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+    .btn-outline:hover {
+      background: var(--orange);
+      color: var(--white);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 40px rgba(249,115,22,0.4);
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--gray);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    .scroll-indicator svg { opacity: 0.5; }
+
+    /* ─────────────── STATS BAR ─────────────── */
+    .stats-bar {
+      background: var(--navy-light);
+      border-top: 1px solid rgba(6,182,212,0.12);
+      border-bottom: 1px solid rgba(6,182,212,0.12);
+      padding: 2.25rem 2rem;
+    }
+    .stats-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      text-align: center;
+      gap: 1rem;
+    }
+    .stat-box { padding: 0.75rem; }
+    .stat-num {
+      display: block;
+      font-size: 2.6rem;
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1;
+      background: linear-gradient(135deg, var(--teal), var(--orange));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.3rem;
+    }
+    .stat-lbl {
+      color: var(--gray);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    /* ─────────────── SHARED LAYOUT ─────────────── */
+    .section-wrap {
+      padding: 6rem 2rem;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+    .section-full {
+      padding: 6rem 2rem;
+    }
+    .section-full-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+    .section-bg-light { background: var(--navy-light); }
+    .section-bg-mid   { background: var(--navy-mid);   }
+
+    .section-tag {
+      display: inline-block;
+      color: var(--teal);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+    .section-title {
+      font-size: clamp(1.85rem, 4.5vw, 3rem);
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      line-height: 1.05;
+      margin-bottom: 0.85rem;
+    }
+    .section-title .grad {
+      background: linear-gradient(125deg, var(--teal), var(--orange));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .section-sub {
+      color: var(--gray);
+      font-size: 1rem;
+      max-width: 580px;
+      margin-bottom: 3rem;
+      line-height: 1.7;
+    }
+
+    /* ─────────────── REVEAL ANIMATIONS ─────────────── */
+    .reveal, .reveal-l, .reveal-r {
+      opacity: 0;
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+    .reveal   { transform: translateY(28px); }
+    .reveal-l { transform: translateX(-28px); }
+    .reveal-r { transform: translateX(28px); }
+    .reveal.on, .reveal-l.on, .reveal-r.on {
+      opacity: 1;
+      transform: translate(0);
+    }
+
+    /* ─────────────── DOSSIER ─────────────── */
+    .dossier-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px,1fr));
+      gap: 1.1rem;
+    }
+    .dossier-card {
+      background: rgba(255,255,255,0.025);
+      border: 1px solid rgba(6,182,212,0.1);
+      border-radius: 14px;
+      padding: 1.4rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      transition: border-color 0.3s, background 0.3s, transform 0.3s;
+    }
+    .dossier-card:hover {
+      border-color: rgba(6,182,212,0.35);
+      background: rgba(6,182,212,0.04);
+      transform: translateY(-4px);
+    }
+    .d-icon {
+      flex-shrink: 0;
+      width: 42px; height: 42px;
+      background: rgba(6,182,212,0.1);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+    }
+    .d-body h4 {
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: var(--white);
+      margin-bottom: 0.25rem;
+    }
+    .d-body p {
+      color: var(--gray);
+      font-size: 0.83rem;
+      line-height: 1.55;
+    }
+    .d-body a { color: var(--teal); text-decoration: none; }
+    .d-body a:hover { text-decoration: underline; }
+
+    /* ─────────────── TIMELINE ─────────────── */
+    .timeline {
+      position: relative;
+      padding-left: 2.2rem;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 8px; bottom: 8px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--teal), var(--orange) 60%, transparent);
+      border-radius: 2px;
+    }
+    .tl-item {
+      position: relative;
+      padding: 0 0 2.75rem 2rem;
+    }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-dot {
+      position: absolute;
+      left: -2.57rem;
+      top: 4px;
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: var(--teal);
+      border: 2.5px solid var(--navy);
+      box-shadow: 0 0 14px rgba(6,182,212,0.55);
+    }
+    .tl-dot.orange {
+      background: var(--orange);
+      box-shadow: 0 0 14px rgba(249,115,22,0.55);
+    }
+    .tl-year {
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--teal);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 0.2rem;
+    }
+    .tl-dot.orange + .tl-year { color: var(--orange); }
+    .tl-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 0.3rem;
+      letter-spacing: -0.3px;
+    }
+    .tl-desc {
+      color: var(--gray);
+      font-size: 0.875rem;
+      line-height: 1.6;
+      max-width: 560px;
+    }
+
+    /* ─────────────── PODCAST ─────────────── */
+    .podcast-header {
+      display: flex;
+      gap: 2rem;
+      align-items: flex-start;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+    .podcast-art {
+      width: 130px; height: 130px;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, var(--teal), var(--orange));
+      border-radius: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+      box-shadow: 0 10px 40px rgba(6,182,212,0.3);
+    }
+    .podcast-meta h3 {
+      font-size: 1.9rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 0.5rem;
+    }
+    .podcast-meta p {
+      color: var(--gray);
+      font-size: 0.93rem;
+      max-width: 480px;
+      margin-bottom: 1.1rem;
+      line-height: 1.65;
+    }
+    .pill-row { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .pill {
+      background: rgba(6,182,212,0.1);
+      border: 1px solid rgba(6,182,212,0.22);
+      color: var(--teal);
+      padding: 0.28rem 0.8rem;
+      border-radius: 100px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+    }
+
+    .episode-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(285px,1fr));
+      gap: 1.2rem;
+    }
+    .ep-card {
+      background: rgba(255,255,255,0.025);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px;
+      padding: 1.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    }
+    .ep-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--teal), var(--orange));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .ep-card:hover {
+      border-color: rgba(6,182,212,0.28);
+      transform: translateY(-5px);
+      box-shadow: 0 14px 48px rgba(0,0,0,0.35);
+    }
+    .ep-card:hover::before { opacity: 1; }
+    .ep-label {
+      font-size: 0.68rem;
+      font-weight: 800;
+      color: var(--teal);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 0.45rem;
+    }
+    .ep-guest {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 0.35rem;
+      letter-spacing: -0.3px;
+    }
+    .ep-topic {
+      font-size: 0.84rem;
+      color: var(--gray);
+      line-height: 1.55;
+      margin-bottom: 1.1rem;
+    }
+    .tag-row { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+    .ep-tag {
+      background: rgba(249,115,22,0.1);
+      color: var(--orange);
+      padding: 0.2rem 0.6rem;
+      border-radius: 5px;
+      font-size: 0.68rem;
+      font-weight: 700;
+    }
+
+    /* ─────────────── VENTURES ─────────────── */
+    .ventures-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px,1fr));
+      gap: 1.5rem;
+    }
+    .venture-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 2rem 1.75rem;
+      text-align: center;
+      transition: border-color 0.35s, transform 0.35s, box-shadow 0.35s;
+    }
+    .venture-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(249,115,22,0.35);
+      box-shadow: 0 20px 60px rgba(249,115,22,0.14);
+    }
+    .v-icon { font-size: 2.75rem; display: block; margin-bottom: 1.1rem; }
+    .v-name {
+      font-size: 1.15rem;
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: -0.5px;
+      margin-bottom: 0.55rem;
+    }
+    .v-desc {
+      color: var(--gray);
+      font-size: 0.855rem;
+      line-height: 1.65;
+      margin-bottom: 1.2rem;
+    }
+    .status-pill {
+      display: inline-block;
+      padding: 0.28rem 0.85rem;
+      border-radius: 100px;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+    }
+    .s-live    { background: rgba(16,185,129,0.12); color: var(--green); border: 1px solid rgba(16,185,129,0.3); }
+    .s-launch  { background: rgba(249,115,22,0.12); color: var(--orange); border: 1px solid rgba(249,115,22,0.3); }
+    .s-grow    { background: rgba(6,182,212,0.12);  color: var(--teal);   border: 1px solid rgba(6,182,212,0.3); }
+
+    /* ─────────────── SKILLS ─────────────── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.75rem 4rem;
+    }
+    .skill-row { }
+    .skill-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.55rem;
+    }
+    .skill-name-lbl {
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: var(--white);
+    }
+    .skill-pct-lbl {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: var(--teal);
+    }
+    .skill-track {
+      height: 9px;
+      background: rgba(255,255,255,0.07);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+    .skill-fill {
+      height: 100%;
+      border-radius: 100px;
+      background: linear-gradient(90deg, var(--teal), var(--orange));
+      width: 0%;
+      transition: width 1.6s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    /* ─────────────── ROAST ─────────────── */
+    .roast-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(295px,1fr));
+      gap: 1.2rem;
+    }
+    .roast-card {
+      background: rgba(249,115,22,0.04);
+      border: 1px solid rgba(249,115,22,0.14);
+      border-radius: 14px;
+      padding: 1.6rem;
+      transition: background 0.3s, border-color 0.3s, transform 0.3s;
+    }
+    .roast-card:hover {
+      background: rgba(249,115,22,0.09);
+      border-color: rgba(249,115,22,0.32);
+      transform: translateY(-4px);
+    }
+    .roast-emoji { font-size: 2.1rem; display: block; margin-bottom: 0.85rem; }
+    .roast-text {
+      color: var(--gray-light);
+      font-size: 0.88rem;
+      line-height: 1.7;
+    }
+    .roast-text strong { color: var(--white); }
+
+    /* ─────────────── CONTACT ─────────────── */
+    .contact-box {
+      max-width: 640px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .contact-links {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2.25rem;
+    }
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255,255,255,0.035);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--white);
+      padding: 0.9rem 1.6rem;
+      border-radius: 11px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.88rem;
+      transition: all 0.3s;
+    }
+    .contact-link:hover {
+      transform: translateY(-4px);
+      border-color: var(--teal);
+      color: var(--teal);
+      box-shadow: 0 10px 30px rgba(6,182,212,0.2);
+    }
+    .contact-link.li:hover {
+      border-color: #0077b5;
+      color: #0077b5;
+      box-shadow: 0 10px 30px rgba(0,119,181,0.2);
+    }
+
+    /* ─────────────── FOOTER ─────────────── */
+    footer {
+      background: var(--navy);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 2.25rem 2rem;
+      text-align: center;
+      color: var(--gray);
+      font-size: 0.85rem;
+    }
+    footer span { color: var(--teal); font-weight: 700; }
+
+    /* ─────────────── KEYFRAMES ─────────────── */
+    @keyframes fadeSlideDown {
+      from { opacity: 0; transform: translateY(-18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes blink {
+      0%,49% { opacity: 1; }
+      50%,100%{ opacity: 0; }
+    }
+    @keyframes scrollPulse {
+      0%,100% { transform: translateX(-50%) translateY(0); opacity: 0.5; }
+      50%      { transform: translateX(-50%) translateY(8px); opacity: 1; }
+    }
+
+    /* ─────────────── RESPONSIVE ─────────────── */
+    @media (max-width: 800px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%; left: 0; right: 0;
+        flex-direction: column;
+        background: rgba(10,14,39,0.97);
+        padding: 1.25rem 2rem 1.75rem;
+        gap: 1.1rem;
+        border-bottom: 1px solid rgba(6,182,212,0.15);
+      }
+      .nav-links.open { display: flex; }
+      .hamburger { display: flex; }
+      .stats-inner { grid-template-columns: repeat(2,1fr); }
+      .skills-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .podcast-header { flex-direction: column; }
+    }
+    @media (max-width: 480px) {
+      nav { padding: 1rem 1.25rem; }
+      nav.scrolled { padding: 0.65rem 1.25rem; }
+      .stats-inner { grid-template-columns: repeat(2,1fr); }
+      .section-wrap, .section-full { padding: 4rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     NAV
+════════════════════════════════════════ -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">DEEJ</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#dossier">Dossier</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+    <li><a href="#podcast">Podcast</a></li>
+    <li><a href="#ventures">Ventures</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ═══════════════════════════════════════
+     HERO
+════════════════════════════════════════ -->
+<section id="hero">
+  <canvas id="particle-canvas"></canvas>
+  <div class="hero-content">
+    <div class="hero-badge">📍 Vredehoek, Cape Town, South Africa</div>
+    <h1 class="hero-name">
+      Dylan<span class="gradient-text">"Deej" Burke</span>
+    </h1>
+    <p class="hero-sub">Helping DTC Brands Scale with Precision Media Buying</p>
+    <div class="typing-row">
+      <span class="typing-prefix">I'm a</span>
+      <span id="typing-text"></span><span class="cursor"></span>
+    </div>
+    <div class="hero-cta">
+      <a href="#ventures" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        See My Ventures
+      </a>
+      <a href="#podcast" class="btn-outline">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="2"/><path d="M16.72 9.28a6 6 0 0 1 0 5.44M19.54 6.46a10 10 0 0 1 0 11.08M7.28 9.28a6 6 0 0 0 0 5.44M4.46 6.46a10 10 0 0 0 0 11.08"/></svg>
+        Growing Lean Podcast
+      </a>
+    </div>
+  </div>
+  <div class="scroll-indicator" id="scrollHint">
+    <span>Scroll</span>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <path d="M12 5v14M5 12l7 7 7-7"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     STATS BAR
+════════════════════════════════════════ -->
+<div class="stats-bar" id="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-box reveal">
+      <span class="stat-num" data-target="4" data-suffix="">0</span>
+      <span class="stat-lbl">Active Ventures</span>
+    </div>
+    <div class="stat-box reveal">
+      <span class="stat-num" data-target="50" data-suffix="+">0</span>
+      <span class="stat-lbl">Podcast Episodes</span>
+    </div>
+    <div class="stat-box reveal">
+      <span class="stat-num" data-target="500" data-suffix="+">0</span>
+      <span class="stat-lbl">LinkedIn Connections</span>
+    </div>
+    <div class="stat-box reveal">
+      <span class="stat-num" data-target="13" data-suffix="+ yrs">0</span>
+      <span class="stat-lbl">Building Things</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     DOSSIER
+════════════════════════════════════════ -->
+<div id="dossier" class="section-full section-bg-light">
+  <div class="section-full-inner">
+    <p class="section-tag reveal">Intel Report</p>
+    <h2 class="section-title reveal">The <span class="grad">Dossier</span></h2>
+    <p class="section-sub reveal">Sourced. Verified. The full picture on Cape Town's busiest builder.</p>
+
+    <div class="dossier-grid">
+      <div class="dossier-card reveal">
+        <div class="d-icon">📍</div>
+        <div class="d-body">
+          <h4>Based In</h4>
+          <p>Vredehoek, Cape Town, South Africa — where the South-Easter blows non-stop but the views are absolutely worth it.</p>
+        </div>
+      </div>
+      <div class="dossier-card reveal">
+        <div class="d-icon">💼</div>
+        <div class="d-body">
+          <h4>LinkedIn Profile</h4>
+          <p>"Helping DTC Brands Scale with Precision Media Buying" — 500+ connections and a feed full of sharp marketing takes.</p>
+        </div>
+      </div>
+      <div class="dossier-card reveal">
+        <div class="d-icon">🎓</div>
+        <div class="d-body">
+          <h4>Herzlia High School</h4>
+          <p>Competed in robotics as a Herzlia High schoolboy. Featured in the <em>Cape Jewish Chronicle</em> in 2012. First builder era — confirmed.</p>
+        </div>
+      </div>
+      <div class="dossier-card reveal">
+        <div class="d-icon">🎙️</div>
+        <div class="d-body">
+          <h4>Growing Lean Podcast</h4>
+          <p>50+ episodes live on Spotify, Apple Podcasts &amp; Amazon Music. CEOs, marketers, and founders share what's actually working.</p>
+        </div>
+      </div>
+      <div class="dossier-card reveal">
+        <div class="d-icon">🚀</div>
+        <div class="d-body">
+          <h4>Community: RevGenius</h4>
+          <p>Active member of RevGenius — one of the sharpest revenue and GTM communities online. Network is net worth.</p>
+        </div>
+      </div>
+      <div class="dossier-card reveal">
+        <div class="d-icon">📝</div>
+        <div class="d-body">
+          <h4>LinkedIn Content</h4>
+          <p>Author of "How Crocs turned ugly into $3B in sales" and deep-dive threads on anti-tobacco ad psychology. Criminally underrated takes.</p>
+        </div>
+      </div>
+      <div class="dossier-card reveal">
+        <div class="d-icon">🛒</div>
+        <div class="d-body">
+          <h4>Degen E-com</h4>
+          <p>Precision media buying for DTC brands. Meta Ads at 95%, Shopify at 90% — not vibes, results backed by data.</p>
+        </div>
+      </div>
+      <div class="dossier-card reveal">
+        <div class="d-icon">🌐</div>
+        <div class="d-body">
+          <h4>Online</h4>
+          <p><a href="http://deejburke.co.za" target="_blank" rel="noopener">deejburke.co.za</a> &nbsp;·&nbsp; <a href="mailto:deej@deejburke.co.za">deej@deejburke.co.za</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     TIMELINE
+════════════════════════════════════════ -->
+<div id="timeline" class="section-wrap">
+  <p class="section-tag reveal">Origin Story</p>
+  <h2 class="section-title reveal">From <span class="grad">Robots to Revenue</span></h2>
+  <p class="section-sub reveal">A decade of building, shipping, failing, and scaling. In that order.</p>
+
+  <div class="timeline">
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2012</div>
+      <div class="tl-title">Robot Builder — Herzlia High</div>
+      <div class="tl-desc">Competing in robotics while still at school. Gets a feature in the Cape Jewish Chronicle. The precision-obsession starts early.</div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2013</div>
+      <div class="tl-title">Cape Board Conference</div>
+      <div class="tl-desc">Participates in the Cape Board Conference. The business bug has officially bitten — and it doesn't let go.</div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2018 – 2020</div>
+      <div class="tl-title">Into the DTC World</div>
+      <div class="tl-desc">Deep-dives into performance marketing, joins RevGenius, and starts stacking DTC and media buying expertise. The full-stack marketer takes shape.</div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-dot orange"></div>
+      <div class="tl-year" style="color:var(--orange)">2021</div>
+      <div class="tl-title">Growing Lean Podcast — Launched</div>
+      <div class="tl-desc">The mic goes live. Deej starts interviewing CEOs, founders, and marketing heavy-hitters on what's actually working. Hits Spotify, Apple &amp; Amazon.</div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-dot orange"></div>
+      <div class="tl-year" style="color:var(--orange)">2022</div>
+      <div class="tl-title">Degen E-com — Founded</div>
+      <div class="tl-desc">Launches Degen E-com. Precision Meta Ads for DTC brands that want real ROAS, not pretty screenshots.</div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-dot orange"></div>
+      <div class="tl-year" style="color:var(--orange)">2023 – 2024</div>
+      <div class="tl-title">Hello Clio &amp; Jewelry Brands</div>
+      <div class="tl-desc">Adds Hello Clio (premium Kindle bags) and a jewelry e-commerce brand to the mix. Portfolio expands. Sleep contracts.</div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-dot orange"></div>
+      <div class="tl-year" style="color:var(--orange)">April 2026</div>
+      <div class="tl-title">ThirstyBird — Dropping Soon</div>
+      <div class="tl-desc">Cape Town's nightlife marketplace launches. Find events, venues, and vibes — all in one place. Watch this space.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     PODCAST
+════════════════════════════════════════ -->
+<div id="podcast" class="section-full section-bg-mid">
+  <div class="section-full-inner">
+    <p class="section-tag reveal">Audio</p>
+    <h2 class="section-title reveal">Growing <span class="grad">Lean</span></h2>
+    <p class="section-sub reveal">50+ episodes. Real founders. Real strategies. Absolute zero fluff.</p>
+
+    <div class="podcast-header reveal">
+      <div class="podcast-art">🎙️</div>
+      <div class="podcast-meta">
+        <h3>Growing Lean Podcast</h3>
+        <p>Deej sits down with CEOs, entrepreneurs, and marketing operators to pull apart what's working right now — in business, marketing, and the messy middle. No guru theatre. Just honest conversation.</p>
+        <div class="pill-row">
+          <span class="pill">Spotify</span>
+          <span class="pill">Apple Podcasts</span>
+          <span class="pill">Amazon Music</span>
+          <span class="pill">50+ Episodes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="episode-grid">
+      <div class="ep-card reveal">
+        <div class="ep-label">Featured Guest</div>
+        <div class="ep-guest">Miele Oscebo</div>
+        <div class="ep-topic">The uncomfortable truths about scaling a business — what the highlights reel never shows you.</div>
+        <div class="tag-row"><span class="ep-tag">Growth</span><span class="ep-tag">Business</span></div>
+      </div>
+      <div class="ep-card reveal">
+        <div class="ep-label">Featured Guest</div>
+        <div class="ep-guest">Carlo Cisco</div>
+        <div class="ep-topic">Community-led growth and the RevGenius playbook — why relationships always outperform cold outreach.</div>
+        <div class="tag-row"><span class="ep-tag">Community</span><span class="ep-tag">Sales</span></div>
+      </div>
+      <div class="ep-card reveal">
+        <div class="ep-label">Featured Guest</div>
+        <div class="ep-guest">Kate — Five to Flow</div>
+        <div class="ep-topic">Wellness, entrepreneurship, and how to find balance when you're building several things at once.</div>
+        <div class="tag-row"><span class="ep-tag">Wellness</span><span class="ep-tag">Mindset</span></div>
+      </div>
+      <div class="ep-card reveal">
+        <div class="ep-label">Featured Guest</div>
+        <div class="ep-guest">Paul Rubens</div>
+        <div class="ep-topic">Marketing psychology meets modern consumer behaviour — deep, practical, no fluff.</div>
+        <div class="tag-row"><span class="ep-tag">Marketing</span><span class="ep-tag">Psychology</span></div>
+      </div>
+      <div class="ep-card reveal">
+        <div class="ep-label">Featured Guest</div>
+        <div class="ep-guest">Ryan Williams</div>
+        <div class="ep-topic">Building personal brand authority and monetising an audience in a noisy market.</div>
+        <div class="tag-row"><span class="ep-tag">Personal Brand</span><span class="ep-tag">Content</span></div>
+      </div>
+      <div class="ep-card reveal">
+        <div class="ep-label">Featured Guest</div>
+        <div class="ep-guest">Jason Tanner</div>
+        <div class="ep-topic">Lean product thinking, startup velocity, and why most teams are optimising for entirely the wrong things.</div>
+        <div class="tag-row"><span class="ep-tag">Product</span><span class="ep-tag">Startups</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     VENTURES
+════════════════════════════════════════ -->
+<div id="ventures" class="section-wrap">
+  <p class="section-tag reveal">What I'm Building</p>
+  <h2 class="section-title reveal">Current <span class="grad">Ventures</span></h2>
+  <p class="section-sub reveal">Four bets. All different. All in motion. Sleep is for people who aren't building.</p>
+
+  <div class="ventures-grid">
+    <div class="venture-card reveal">
+      <span class="v-icon">🐦</span>
+      <div class="v-name">ThirstyBird</div>
+      <div class="v-desc">Cape Town's nightlife marketplace — find events, venues, and the right vibe, all in one place. The city's social scene is about to level up.</div>
+      <span class="status-pill s-launch">Launching April 2026</span>
+    </div>
+    <div class="venture-card reveal">
+      <span class="v-icon">📚</span>
+      <div class="v-name">Hello Clio</div>
+      <div class="v-desc">Premium Kindle bags and accessories for serious readers. Clean design, clean brand, clean product.</div>
+      <span class="status-pill s-live">Live</span>
+    </div>
+    <div class="venture-card reveal">
+      <span class="v-icon">💎</span>
+      <div class="v-name">Jewelry E-com</div>
+      <div class="v-desc">Running a jewelry e-commerce brand using the same precision media buying behind client results. Practice what you preach.</div>
+      <span class="status-pill s-grow">Growing</span>
+    </div>
+    <div class="venture-card reveal">
+      <span class="v-icon">🎙️</span>
+      <div class="v-name">Growing Lean</div>
+      <div class="v-desc">The podcast keeps growing. 50+ episodes, elite guests, building the media side of the brand one episode at a time.</div>
+      <span class="status-pill s-live">Active</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SKILLS
+════════════════════════════════════════ -->
+<div id="skills" class="section-full section-bg-light">
+  <div class="section-full-inner">
+    <p class="section-tag reveal">The Toolkit</p>
+    <h2 class="section-title reveal">Skills &amp; <span class="grad">Superpowers</span></h2>
+    <p class="section-sub reveal">Refined over years of building, scaling, burning ad spend, and iterating until it works.</p>
+
+    <div class="skills-grid" id="skills-grid">
+      <div class="skill-row reveal">
+        <div class="skill-head">
+          <span class="skill-name-lbl">Meta Ads</span>
+          <span class="skill-pct-lbl">95%</span>
+        </div>
+        <div class="skill-track"><div class="skill-fill" data-pct="95"></div></div>
+      </div>
+      <div class="skill-row reveal">
+        <div class="skill-head">
+          <span class="skill-name-lbl">Shopify &amp; DTC Operations</span>
+          <span class="skill-pct-lbl">90%</span>
+        </div>
+        <div class="skill-track"><div class="skill-fill" data-pct="90"></div></div>
+      </div>
+      <div class="skill-row reveal">
+        <div class="skill-head">
+          <span class="skill-name-lbl">Podcasting</span>
+          <span class="skill-pct-lbl">92%</span>
+        </div>
+        <div class="skill-track"><div class="skill-fill" data-pct="92"></div></div>
+      </div>
+      <div class="skill-row reveal">
+        <div class="skill-head">
+          <span class="skill-name-lbl">Analytics &amp; Attribution</span>
+          <span class="skill-pct-lbl">87%</span>
+        </div>
+        <div class="skill-track"><div class="skill-fill" data-pct="87"></div></div>
+      </div>
+      <div class="skill-row reveal">
+        <div class="skill-head">
+          <span class="skill-name-lbl">Content Strategy &amp; LinkedIn</span>
+          <span class="skill-pct-lbl">88%</span>
+        </div>
+        <div class="skill-track"><div class="skill-fill" data-pct="88"></div></div>
+      </div>
+      <div class="skill-row reveal">
+        <div class="skill-head">
+          <span class="skill-name-lbl">Braai 🔥</span>
+          <span class="skill-pct-lbl">100%</span>
+        </div>
+        <div class="skill-track"><div class="skill-fill" data-pct="100"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     FUN FACTS / ROAST
+════════════════════════════════════════ -->
+<div id="roast" class="section-wrap">
+  <p class="section-tag reveal">The Real Deej</p>
+  <h2 class="section-title reveal">Fun Facts &amp; <span class="grad">Light Roast</span></h2>
+  <p class="section-sub reveal">If you can't laugh at yourself, honestly, what are you even doing? Most of this is entirely true.</p>
+
+  <div class="roast-grid">
+    <div class="roast-card reveal">
+      <span class="roast-emoji">🤖</span>
+      <p class="roast-text">Once built <strong>competitive robots in high school</strong>. The servo motors are long gone, but the obsession with precision? Still very much running in the background.</p>
+    </div>
+    <div class="roast-card reveal">
+      <span class="roast-emoji">👟</span>
+      <p class="roast-text">Wrote a LinkedIn post about <strong>how Crocs turned ugly into $3B in sales</strong> — reportedly the most animated he's ever been about footwear. No further comment.</p>
+    </div>
+    <div class="roast-card reveal">
+      <span class="roast-emoji">💨</span>
+      <p class="roast-text">Based in Vredehoek, where the <strong>Cape South-Easter</strong> blows so hard it tests your commitment to outdoor coffee. Deej stays put. Respect where it's due.</p>
+    </div>
+    <div class="roast-card reveal">
+      <span class="roast-emoji">🎙️</span>
+      <p class="roast-text">Has interviewed enough CEOs to fill a full boardroom, still introduces himself as <strong>"just a Cape Town hustler"</strong>. The understatement energy is strong with this one.</p>
+    </div>
+    <div class="roast-card reveal">
+      <span class="roast-emoji">🐦</span>
+      <p class="roast-text">Currently building a <strong>nightlife marketplace</strong> while running a podcast, two e-com brands, and a media buying operation. Sleep is treated as optional. Concerned friends have noted this.</p>
+    </div>
+    <div class="roast-card reveal">
+      <span class="roast-emoji">💰</span>
+      <p class="roast-text">Part of the <strong>High Ticket Closers</strong> world. The man who can close any deal is also the man who will quietly close the last boerie roll at a braai without breaking conversation.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     CONTACT
+════════════════════════════════════════ -->
+<div id="contact" class="section-full section-bg-mid">
+  <div class="contact-box">
+    <p class="section-tag reveal" style="display:block;text-align:center">Get In Touch</p>
+    <h2 class="section-title reveal">Let's <span class="grad">Connect</span></h2>
+    <p class="reveal" style="color:var(--gray);margin-top:0.5rem">Got a brand to scale, a podcast pitch, or just want to talk shop? Pull up.</p>
+    <div class="contact-links reveal">
+      <a href="mailto:deej@deejburke.co.za" class="contact-link">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+          <polyline points="22,6 12,13 2,6"/>
+        </svg>
+        Email Deej
+      </a>
+      <a href="https://www.linkedin.com/in/dylan-deej-burke-8a09a3106" target="_blank" rel="noopener" class="contact-link li">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/>
+          <circle cx="4" cy="4" r="2"/>
+        </svg>
+        LinkedIn
+      </a>
+      <a href="http://deejburke.co.za" target="_blank" rel="noopener" class="contact-link">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="2" y1="12" x2="22" y2="12"/>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+        Website
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     FOOTER
+════════════════════════════════════════ -->
+<footer>
+  <p>Crafted by Deej 🔥 &nbsp;·&nbsp; <span>Vredehoek, Cape Town</span> &nbsp;·&nbsp; © 2026</p>
+</footer>
+
+<script>
+/* ══════════════════════════════════════════
+   PARTICLE CANVAS
+══════════════════════════════════════════ */
+(function () {
+  const canvas = document.getElementById('particle-canvas');
+  const ctx = canvas.getContext('2d');
+  let pts = [];
+  let W, H;
+
+  const CFG = {
+    n: 90,
+    maxDist: 130,
+    speed: 0.45,
+    minR: 1.2,
+    maxR: 2.8,
+  };
+
+  function resize() {
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+
+  function Pt() {
+    this.x  = Math.random() * W;
+    this.y  = Math.random() * H;
+    this.vx = (Math.random() - 0.5) * CFG.speed;
+    this.vy = (Math.random() - 0.5) * CFG.speed;
+    this.r  = CFG.minR + Math.random() * (CFG.maxR - CFG.minR);
+    this.a  = 0.25 + Math.random() * 0.55;
+  }
+
+  Pt.prototype.step = function () {
+    this.x += this.vx;
+    this.y += this.vy;
+    if (this.x < 0 || this.x > W) this.vx *= -1;
+    if (this.y < 0 || this.y > H) this.vy *= -1;
+  };
+
+  Pt.prototype.draw = function () {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(6,182,212,' + this.a + ')';
+    ctx.fill();
+  };
+
+  function init() {
+    pts = [];
+    for (let i = 0; i < CFG.n; i++) pts.push(new Pt());
+  }
+
+  function lines() {
+    for (let i = 0; i < pts.length; i++) {
+      for (let j = i + 1; j < pts.length; j++) {
+        const dx = pts[i].x - pts[j].x;
+        const dy = pts[i].y - pts[j].y;
+        const d  = Math.sqrt(dx * dx + dy * dy);
+        if (d < CFG.maxDist) {
+          const a = (1 - d / CFG.maxDist) * 0.38;
+          ctx.beginPath();
+          ctx.moveTo(pts[i].x, pts[i].y);
+          ctx.lineTo(pts[j].x, pts[j].y);
+          ctx.strokeStyle = 'rgba(6,182,212,' + a + ')';
+          ctx.lineWidth = 0.9;
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  function loop() {
+    ctx.clearRect(0, 0, W, H);
+    pts.forEach(p => { p.step(); p.draw(); });
+    lines();
+    requestAnimationFrame(loop);
+  }
+
+  window.addEventListener('resize', () => { resize(); init(); });
+  resize();
+  init();
+  loop();
+})();
+
+/* ══════════════════════════════════════════
+   TYPING ANIMATION
+══════════════════════════════════════════ */
+(function () {
+  const roles = [
+    'Podcast Host',
+    'DTC Marketer',
+    'Entrepreneur',
+    'Meta Ads Specialist',
+    'Former Robot Builder',
+    'Cape Town Hustler'
+  ];
+
+  const el  = document.getElementById('typing-text');
+  let ri    = 0;
+  let ci    = 0;
+  let del   = false;
+
+  function tick() {
+    const cur = roles[ri];
+    if (!del) {
+      ci++;
+      el.textContent = cur.slice(0, ci);
+      if (ci === cur.length) { del = true; return setTimeout(tick, 2000); }
+    } else {
+      ci--;
+      el.textContent = cur.slice(0, ci);
+      if (ci === 0) { del = false; ri = (ri + 1) % roles.length; }
+    }
+    setTimeout(tick, del ? 55 : 95);
+  }
+
+  setTimeout(tick, 1000);
+})();
+
+/* ══════════════════════════════════════════
+   SCROLL REVEAL
+══════════════════════════════════════════ */
+(function () {
+  const els = document.querySelectorAll('.reveal, .reveal-l, .reveal-r');
+
+  const obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      // stagger siblings in the same parent
+      const siblings = Array.from(
+        entry.target.parentElement.querySelectorAll('.reveal, .reveal-l, .reveal-r')
+      );
+      const idx   = siblings.indexOf(entry.target);
+      const delay = Math.min(idx * 75, 380);
+      setTimeout(function () {
+        entry.target.classList.add('on');
+      }, delay);
+      obs.unobserve(entry.target);
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+  els.forEach(function (el) { obs.observe(el); });
+})();
+
+/* ══════════════════════════════════════════
+   COUNTER ANIMATION
+══════════════════════════════════════════ */
+(function () {
+  const counters = document.querySelectorAll('.stat-num');
+
+  const obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      const el     = entry.target;
+      const target = parseInt(el.dataset.target, 10);
+      const suffix = el.dataset.suffix || '';
+      const dur    = 1400;
+      const step   = target / (dur / 16);
+      let cur = 0;
+      const t = setInterval(function () {
+        cur = Math.min(cur + step, target);
+        el.textContent = Math.round(cur) + suffix;
+        if (cur >= target) clearInterval(t);
+      }, 16);
+      obs.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+
+  counters.forEach(function (el) { obs.observe(el); });
+})();
+
+/* ══════════════════════════════════════════
+   SKILL BARS
+══════════════════════════════════════════ */
+(function () {
+  const fills   = document.querySelectorAll('.skill-fill');
+  const section = document.getElementById('skills');
+  let fired = false;
+
+  const obs = new IntersectionObserver(function (entries) {
+    if (entries[0].isIntersecting && !fired) {
+      fired = true;
+      fills.forEach(function (fill, i) {
+        setTimeout(function () {
+          fill.style.width = fill.dataset.pct + '%';
+        }, i * 110);
+      });
+      obs.unobserve(section);
+    }
+  }, { threshold: 0.2 });
+
+  if (section) obs.observe(section);
+})();
+
+/* ══════════════════════════════════════════
+   NAV — SCROLL + HAMBURGER
+══════════════════════════════════════════ */
+(function () {
+  const nav       = document.getElementById('navbar');
+  const burger    = document.getElementById('hamburger');
+  const navLinks  = document.getElementById('navLinks');
+  const scrollHint = document.getElementById('scrollHint');
+
+  window.addEventListener('scroll', function () {
+    nav.classList.toggle('scrolled', window.scrollY > 70);
+  });
+
+  burger.addEventListener('click', function () {
+    burger.classList.toggle('open');
+    navLinks.classList.toggle('open');
+  });
+
+  navLinks.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      burger.classList.remove('open');
+      navLinks.classList.remove('open');
+    });
+  });
+
+  if (scrollHint) {
+    scrollHint.addEventListener('click', function () {
+      document.getElementById('stats-bar').scrollIntoView({ behavior: 'smooth' });
+    });
+  }
+})();
+</script>
+</body>
+</html>
