@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Matthew Ward — Crafted by Deej</title>
+<meta name="description" content="A personalised spotlight on Matthew Ward — food & beverage growth advisory, investor and buyer networks, and decades of sector experience." />
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0e27;
+  --bg2:#101735;
+  --card:#121a3e;
+  --text:#e8eefc;
+  --muted:#9fb0d1;
+  --teal:#06b6d4;
+  --orange:#f97316;
+  --line:rgba(255,255,255,.08);
+  --good:#10b981;
+}
+html,body{background:radial-gradient(circle at top right, rgba(6,182,212,.12), transparent 28%),radial-gradient(circle at bottom left, rgba(249,115,22,.1), transparent 30%),var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif;scroll-behavior:smooth;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+#particles{position:fixed;inset:0;z-index:0;pointer-events:none}
+.container{width:min(1120px,calc(100% - 32px));margin:0 auto;position:relative;z-index:1}
+section{padding:88px 0;border-top:1px solid rgba(255,255,255,.03)}
+.hero{min-height:100vh;display:flex;align-items:center;position:relative}
+.hero-grid{display:grid;grid-template-columns:1.25fr .9fr;gap:28px;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border:1px solid rgba(6,182,212,.25);background:rgba(6,182,212,.09);border-radius:999px;color:var(--teal);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.hero h1{font-size:clamp(3rem,7vw,6rem);line-height:.95;letter-spacing:-.04em;margin:20px 0 16px}
+.gradient{background:linear-gradient(135deg,#fff 0%,#b5f8ff 45%,#ffb370 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{font-size:clamp(1rem,1.8vw,1.25rem);color:var(--muted);line-height:1.7;max-width:760px}
+.typewrap{margin:22px 0 26px;font-size:15px;color:var(--teal);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;min-height:24px}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:24px}
+.btn{padding:14px 18px;border-radius:14px;font-weight:700;transition:.25s ease;border:1px solid transparent;display:inline-flex;align-items:center;gap:10px}
+.btn.primary{background:linear-gradient(135deg,var(--teal),#0ea5c8);color:#04121a;box-shadow:0 10px 35px rgba(6,182,212,.2)}
+.btn.secondary{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.09);color:var(--text)}
+.btn:hover{transform:translateY(-2px)}
+.hero-card,.card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.08);border-radius:24px;box-shadow:0 10px 50px rgba(0,0,0,.2)}
+.hero-card{padding:24px}
+.kicker{font-size:12px;text-transform:uppercase;letter-spacing:.16em;color:var(--orange);font-weight:800;margin-bottom:12px}
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+.stat{padding:18px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.02)}
+.num{font-size:2rem;font-weight:900;letter-spacing:-.04em}
+.lab{font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin-top:4px}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:28px}
+.section-head h2{font-size:clamp(1.8rem,3vw,3rem);letter-spacing:-.03em}
+.section-head p{max-width:620px;color:var(--muted);line-height:1.7}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.card{padding:24px}
+.list{display:grid;gap:14px;margin-top:8px}
+.item{padding:16px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.02)}
+.item small{display:block;color:var(--teal);text-transform:uppercase;letter-spacing:.14em;font-weight:700;margin-bottom:6px}
+.item p{color:var(--muted);line-height:1.7}
+.timeline{position:relative;padding-left:28px;display:grid;gap:20px}
+.timeline:before{content:"";position:absolute;left:8px;top:0;bottom:0;width:2px;background:linear-gradient(var(--teal),var(--orange))}
+.t{position:relative;padding:4px 0 0 8px}
+.t:before{content:"";position:absolute;left:-26px;top:10px;width:12px;height:12px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 4px rgba(6,182,212,.16)}
+.t strong{display:block;font-size:1.1rem;margin-bottom:4px}
+.t span{color:var(--orange);font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.t p{margin-top:8px;color:var(--muted);line-height:1.7}
+.venture-grid,.episode-grid,.skills-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.venture,.ep,.skill{padding:22px;border:1px solid var(--line);border-radius:20px;background:rgba(255,255,255,.02);transition:.25s ease}
+.venture:hover,.ep:hover,.skill:hover{transform:translateY(-4px);border-color:rgba(6,182,212,.35)}
+.tag{display:inline-flex;padding:7px 11px;border-radius:999px;background:rgba(249,115,22,.12);border:1px solid rgba(249,115,22,.22);color:var(--orange);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.14em;margin-bottom:12px}
+.venture h3,.ep h3,.skill h3{font-size:1.15rem;margin-bottom:8px}
+.venture p,.ep p,.skill p{color:var(--muted);line-height:1.7}
+.skillbar{margin-top:14px;height:8px;background:rgba(255,255,255,.06);border-radius:999px;overflow:hidden}
+.fill{height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--orange));border-radius:999px;transition:width 1.3s ease}
+.fun{background:linear-gradient(135deg,rgba(249,115,22,.12),rgba(6,182,212,.1));border:1px solid rgba(249,115,22,.18)}
+.fun ul{display:grid;gap:14px;margin-top:10px;padding-left:18px}
+.fun li{color:var(--muted);line-height:1.8}
+.source{display:block;margin-top:8px;color:#7d8fb1;font-size:12px}
+.footer{padding:40px 0 70px;color:#9aa4bf;text-align:center}
+.footer strong{color:#fff}
+.reveal{opacity:0;transform:translateY(24px);transition:all .7s cubic-bezier(.2,.7,.2,1)}
+.reveal.show{opacity:1;transform:translateY(0)}
+@media(max-width:920px){.hero-grid,.grid-2,.venture-grid,.episode-grid,.skills-grid{grid-template-columns:1fr}.hero{padding-top:44px}.section-head{display:block}.section-head p{margin-top:10px}.stat-grid{grid-template-columns:1fr 1fr 1fr}}
+@media(max-width:640px){section{padding:68px 0}.container{width:min(100% - 24px,1120px)}.hero h1{font-size:3.1rem}.stat-grid{grid-template-columns:1fr}.cta-row{flex-direction:column}.btn{justify-content:center}}
+</style>
+</head>
+<body>
+<canvas id="particles"></canvas>
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="pill reveal">Cape Town • Food & Beverage • Advisory</div>
+      <h1 class="reveal"><span class="gradient">Matthew<br>Ward</span></h1>
+      <p class="sub reveal">Connecting food and beverage start-ups with the buyers, investors and commercial opportunities that actually matter — without the corporate waffle, the pointless theatre, or the 84-slide deck nobody asked for.</p>
+      <div class="typewrap reveal"><span id="typed"></span></div>
+      <div class="cta-row reveal">
+        <a class="btn primary" href="https://michaeltward.com" target="_blank" rel="noreferrer">Visit Michael T Ward</a>
+        <a class="btn secondary" href="https://www.linkedin.com/in/matthew-ward-75b0803a0?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank" rel="noreferrer">Current LinkedIn</a>
+      </div>
+    </div>
+    <div class="hero-card reveal">
+      <div class="kicker">Quick Read</div>
+      <p style="color:var(--muted);line-height:1.75">From the outside, Matthew looks like the sort of operator who quietly opens doors that would take founders years to knock on. From the inside, it’s decades of network-building across the global food service sector, translated into something rare: introductions that mean something, and growth advice that isn’t full of consulting perfume.</p>
+      <div class="stat-grid">
+        <div class="stat"><div class="num" data-count="30">0</div><div class="lab">Years in Food Service</div></div>
+        <div class="stat"><div class="num" data-count="3">0</div><div class="lab">Core Audiences</div></div>
+        <div class="stat"><div class="num" data-count="1">0</div><div class="lab">Goal: Real Growth</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <h2>The Dossier</h2>
+      </div>
+      <p>What stood out immediately: clear positioning, practical language, and the sort of sector credibility that makes founders stop bluffing and start listening.</p>
+    </div>
+    <div class="grid-2">
+      <div class="card reveal">
+        <div class="list">
+          <div class="item">
+            <small>Business</small>
+            <p><strong>Michael T Ward</strong> is positioned as a <strong>Food & Beverage Technology Growth Advisory</strong> business focused on helping startups reach buyers, investors and commercial traction.</p>
+            <span class="source">Source: michaeltward.com</span>
+          </div>
+          <div class="item">
+            <small>Positioning</small>
+            <p>The core promise is brutally simple and actually useful: <strong>connecting start-ups with the buyers and investments that matter</strong>.</p>
+            <span class="source">Source: michaeltward.com</span>
+          </div>
+          <div class="item">
+            <small>Why He Matters</small>
+            <p>He is not selling “innovation theatre”. He is selling <strong>access, readiness, introductions, and commercial reality</strong> — pilots, pitches, negotiations and contracts.</p>
+            <span class="source">Source: michaeltward.com</span>
+          </div>
+        </div>
+      </div>
+      <div class="card reveal">
+        <div class="list">
+          <div class="item">
+            <small>Audience</small>
+            <p>Three audiences, one goal: <strong>founders, buyers, and investors</strong>. That’s a clever triangle — everyone necessary to move a business from “interesting idea” to “actual revenue”.</p>
+            <span class="source">Source: michaeltward.com</span>
+          </div>
+          <div class="item">
+            <small>Sector Depth</small>
+            <p>The site points to <strong>decades of experience across the global food service sector</strong>, spanning contract caterers, operators, procurement leaders and investment relationships.</p>
+            <span class="source">Source: michaeltward.com</span>
+          </div>
+          <div class="item">
+            <small>LinkedIn</small>
+            <p>Current LinkedIn confirmed by you: <strong>matthew-ward-75b0803a0</strong>. Old <strong>M/Y Bina</strong> profile intentionally excluded.</p>
+            <span class="source">Source: Provided and confirmed by Deej</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>What He Actually Does</h2>
+      <p>No jargon tornado. No “synergy at scale” nonsense. Just a straightforward process for getting F&B startups commercially ready.</p>
+    </div>
+    <div class="timeline">
+      <div class="t reveal">
+        <span>Step 01</span>
+        <strong>Initial Conversation</strong>
+        <p>Understand the business, the goals, and where the founders are stuck. No generic template nonsense — just a proper conversation.</p>
+      </div>
+      <div class="t reveal">
+        <span>Step 02</span>
+        <strong>Clarity & Assessment</strong>
+        <p>Review commercial readiness, find the gaps, and map what actually has to happen before buyers or investors take the business seriously.</p>
+      </div>
+      <div class="t reveal">
+        <span>Step 03</span>
+        <strong>Introductions & Support</strong>
+        <p>Warm introductions to relevant buyers, partners or investors — then support through pilots, pitches, negotiations and contracts. In other words: the part where things get real.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>Why This Is Interesting</h2>
+      <p>A lot of advisory businesses look like someone fed LinkedIn into a blender. This one doesn’t.</p>
+    </div>
+    <div class="venture-grid">
+      <div class="venture reveal">
+        <div class="tag">Commercial Readiness</div>
+        <h3>From Idea to Reality</h3>
+        <p>The site is built around moving companies from “promising idea” to “commercial reality”. Which, frankly, is where most startups get absolutely bliksemed.</p>
+      </div>
+      <div class="venture reveal">
+        <div class="tag">Tier 1 Access</div>
+        <h3>Buyer Relationships</h3>
+        <p>Access to decision-makers is the moat. The value here isn’t just advice — it’s the network that would otherwise take founders years of awkward coffee meetings to build.</p>
+      </div>
+      <div class="venture reveal">
+        <div class="tag">Investor Story</div>
+        <h3>Making a Business Fundable</h3>
+        <p>Going from “good product” to “investor-ready story” is one of the site’s stated outcomes. That’s a useful skill, because investors have the emotional warmth of airport furniture.</p>
+      </div>
+      <div class="venture reveal">
+        <div class="tag">Execution</div>
+        <h3>Pilots to Rollouts</h3>
+        <p>It’s not just strategic positioning — the outcomes point to first pilots, multi-site rollouts, and scalable growth. Proper grown-up stuff.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>Operator Profile</h2>
+      <p>Based on the way the business is presented, here’s the profile that emerges.</p>
+    </div>
+    <div class="skills-grid">
+      <div class="skill reveal">
+        <h3>Network Power</h3>
+        <p>Looks like a classic relationship operator: someone whose real leverage lives in the people he can call, not just the opinions he can write into a PDF.</p>
+        <div class="skillbar"><div class="fill" data-width="96"></div></div>
+      </div>
+      <div class="skill reveal">
+        <h3>Commercial Judgment</h3>
+        <p>The language is focused on readiness, positioning and outcomes — not vanity fluff. That usually signals someone who’s seen enough pitches to know what survives contact with reality.</p>
+        <div class="skillbar"><div class="fill" data-width="91"></div></div>
+      </div>
+      <div class="skill reveal">
+        <h3>Founder Translation</h3>
+        <p>Bridging founders, buyers and investors means translating between three species that often speak completely different dialects of madness.</p>
+        <div class="skillbar"><div class="fill" data-width="89"></div></div>
+      </div>
+      <div class="skill reveal">
+        <h3>Sector Credibility</h3>
+        <p>“Decades in food service” is not a cute throwaway line. In this world, sector memory matters. A lot.</p>
+        <div class="skillbar"><div class="fill" data-width="94"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>Fun Facts, Mild Roasting, and Other Truths</h2>
+      <p>Because a page like this should not read like it was approved by legal.</p>
+    </div>
+    <div class="card fun reveal">
+      <ul>
+        <li><strong>“Michael T Ward”</strong> sounds less like a consultancy and more like the name of a man who can get a buyer on the phone before breakfast and ruin your weak pitch by lunch.</li>
+        <li>The site’s tone says: <em>“I’ve seen too many founders mistake enthusiasm for a business model.”</em> Fair enough.</li>
+        <li>There’s something wonderfully unfussy about a business that basically says: <strong>“Need buyers? Need investors? Need to stop winging it? Fine. Let’s talk.”</strong></li>
+        <li>The old <strong>M/Y Bina</strong> LinkedIn floating around is a perfect bit of internet chaos. Like finding an old haircut photo and hoping nobody notices. Sadly, we noticed. Then ignored it.</li>
+        <li>If most advisors sell frameworks, this feels more like selling <strong>phone calls that actually get answered</strong>. Which, in business, is witchcraft.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>Contact</h2>
+      <p>If you build food and beverage tech and want access to the people who matter, this seems like the obvious place to start.</p>
+    </div>
+    <div class="grid-2">
+      <a class="card reveal" href="https://michaeltward.com" target="_blank" rel="noreferrer">
+        <div class="kicker">Website</div>
+        <h3>michaeltward.com</h3>
+        <p style="color:var(--muted);line-height:1.7;margin-top:8px">Food & Beverage Growth Advisory</p>
+      </a>
+      <a class="card reveal" href="https://www.linkedin.com/in/matthew-ward-75b0803a0?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank" rel="noreferrer">
+        <div class="kicker">LinkedIn</div>
+        <h3>Matthew Ward</h3>
+        <p style="color:var(--muted);line-height:1.7;margin-top:8px">Current profile confirmed before build</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="container footer">
+  <strong>Crafted by Deej 🔥</strong>
+</div>
+
+<script>
+const roles=["Food & Beverage Growth Advisory","Investor & Buyer Connector","Commercial Readiness Operator","Door Opener for Startups","Cape Town Network Builder"];
+let i=0,j=0,del=false;const t=document.getElementById('typed');
+function type(){const cur=roles[i];if(!del){t.textContent=cur.slice(0,++j);if(j===cur.length){del=true;setTimeout(type,1200);return}}else{t.textContent=cur.slice(0,--j);if(j===0){del=false;i=(i+1)%roles.length}}setTimeout(type,del?28:64)} type();
+
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+const fills=document.querySelectorAll('.fill');
+const fio=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const f=e.target;f.style.width=f.dataset.width+'%';fio.unobserve(f)}})},{threshold:.35});
+fills.forEach(f=>fio.observe(f));
+
+const nums=document.querySelectorAll('[data-count]');
+const nio=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const el=e.target;const target=parseInt(el.dataset.count,10);let n=0;const step=Math.max(1,Math.ceil(target/40));const timer=setInterval(()=>{n+=step;if(n>=target){n=target;clearInterval(timer)}el.textContent=n+(target>=30&&target<100?'+':'')},28);nio.unobserve(el)}})},{threshold:.4});
+nums.forEach(n=>nio.observe(n));
+
+const canvas=document.getElementById('particles');const ctx=canvas.getContext('2d');let w,h,pts=[];
+function size(){w=canvas.width=innerWidth;h=canvas.height=innerHeight}
+function seed(){pts=Array.from({length:80},()=>({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.45,vy:(Math.random()-.5)*.45,r:Math.random()*1.8+0.6}))}
+function draw(){ctx.clearRect(0,0,w,h);for(const p of pts){p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>w)p.vx*=-1;if(p.y<0||p.y>h)p.vy*=-1;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,.38)';ctx.fill()}for(let i=0;i<pts.length;i++){for(let j=i+1;j<pts.length;j++){const a=pts[i],b=pts[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.hypot(dx,dy);if(d<120){ctx.strokeStyle=`rgba(6,182,212,${0.14*(1-d/120)})`;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke()}}}requestAnimationFrame(draw)}
+addEventListener('resize',()=>{size();seed()});size();seed();draw();
+</script>
+</body>
+</html>
