@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dylan Burke | Performance Marketing</title>
+  <meta name="description" content="Dylan Burke helps DTC and eCommerce brands scale with precision media buying, creative strategy, and commercial thinking." />
+  <style>
+    :root {
+      --bg: #0a0e27;
+      --bg-2: #101632;
+      --panel: rgba(255,255,255,.05);
+      --panel-2: rgba(255,255,255,.08);
+      --text: #f5f7fb;
+      --muted: #a9b1c7;
+      --line: rgba(255,255,255,.12);
+      --accent: #d9b36c;
+      --accent-2: #8aa3ff;
+      --shadow: 0 30px 80px rgba(0,0,0,.45);
+      --max: 1180px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(217,179,108,.12), transparent 28%),
+        radial-gradient(circle at 100% 20%, rgba(138,163,255,.12), transparent 30%),
+        linear-gradient(180deg, #060914 0%, #0a0e27 100%);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    canvas#particles {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: .9;
+    }
+    .wrap { width: min(var(--max), calc(100% - 40px)); margin: 0 auto; position: relative; z-index: 1; }
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(18px);
+      background: rgba(6,10,22,.55);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .nav-inner {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+    }
+    .brand {
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 64px 0 48px;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 42px;
+      align-items: center;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border: 1px solid rgba(217,179,108,.25);
+      background: rgba(217,179,108,.08);
+      border-radius: 999px;
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      margin-bottom: 24px;
+    }
+    h1 {
+      font-size: clamp(3rem, 7vw, 6.4rem);
+      line-height: .96;
+      letter-spacing: -.05em;
+      margin-bottom: 20px;
+      max-width: 760px;
+    }
+    h1 .grad {
+      background: linear-gradient(135deg, #ffffff 0%, #efe1bd 38%, #9bb0ff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .lead {
+      max-width: 700px;
+      font-size: clamp(1rem, 1.8vw, 1.22rem);
+      line-height: 1.75;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+    .typed {
+      min-height: 28px;
+      color: var(--accent);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 15px;
+      margin-bottom: 34px;
+    }
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 26px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 22px;
+      border-radius: 14px;
+      font-size: 14px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      transition: .25s ease;
+      cursor: pointer;
+    }
+    .btn.primary {
+      background: linear-gradient(135deg, var(--accent), #f0d7a2);
+      color: #111;
+      box-shadow: 0 16px 40px rgba(217,179,108,.18);
+    }
+    .btn.secondary {
+      border-color: var(--line);
+      background: rgba(255,255,255,.03);
+      color: var(--text);
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .micro {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .micro strong { color: var(--text); }
+
+    .portrait-card {
+      position: relative;
+      padding: 22px;
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+      box-shadow: var(--shadow);
+    }
+    .portrait-card::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(217,179,108,.45), rgba(138,163,255,.25), rgba(255,255,255,.05));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+    .portrait {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      border-radius: 22px;
+      display: block;
+      filter: saturate(1.02) contrast(1.03);
+    }
+    .portrait-meta {
+      margin-top: 18px;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: center;
+    }
+    .portrait-meta h3 { font-size: 1.1rem; }
+    .portrait-meta p { color: var(--muted); font-size: 14px; }
+
+    section {
+      padding: 96px 0;
+      border-top: 1px solid rgba(255,255,255,.04);
+    }
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 34px;
+    }
+    .section-head h2 {
+      font-size: clamp(2rem, 4vw, 3.3rem);
+      letter-spacing: -.04em;
+      max-width: 520px;
+    }
+    .section-head p {
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 520px;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 22px;
+      padding: 24px;
+      transition: .25s ease;
+    }
+    .card:hover { transform: translateY(-4px); border-color: rgba(217,179,108,.2); }
+    .card .tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .card h3 {
+      font-size: 1.16rem;
+      margin-bottom: 10px;
+      line-height: 1.35;
+    }
+    .card p { color: var(--muted); line-height: 1.8; }
+
+    .results {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 8px;
+    }
+    .result {
+      padding: 22px;
+      border-radius: 22px;
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+    .result .num {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -.04em;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+    .result .label {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .timeline {
+      position: relative;
+      margin-top: 12px;
+      padding-left: 28px;
+      display: grid;
+      gap: 24px;
+    }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 8px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(var(--accent), rgba(138,163,255,.8));
+    }
+    .t-item {
+      position: relative;
+      padding-left: 10px;
+    }
+    .t-item::before {
+      content: "";
+      position: absolute;
+      left: -24px;
+      top: 7px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px rgba(217,179,108,.1);
+    }
+    .t-year {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      margin-bottom: 8px;
+    }
+    .t-item h3 { margin-bottom: 6px; font-size: 1.1rem; }
+    .t-item p { color: var(--muted); line-height: 1.8; }
+
+    .skill {
+      margin-bottom: 18px;
+    }
+    .skill-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+    .skill-top span:last-child { color: var(--muted); }
+    .bar {
+      width: 100%;
+      height: 9px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.04);
+    }
+    .fill {
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), #f0d7a2 40%, var(--accent-2));
+      transition: width 1.4s ease;
+    }
+
+    .quote {
+      font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+      line-height: 1.75;
+      color: var(--text);
+      max-width: 920px;
+    }
+    .quote span { color: var(--accent); }
+
+    .footer {
+      padding: 60px 0 90px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .footer strong { color: var(--text); }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid, .grid-3, .grid-2, .results { grid-template-columns: 1fr; }
+      .section-head { flex-direction: column; align-items: start; }
+      .nav-links { display: none; }
+      .hero { min-height: auto; padding: 46px 0 24px; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="particles"></canvas>
+
+  <div class="nav">
+    <div class="nav-inner">
+      <div class="brand">Dylan Burke</div>
+      <div class="nav-links">
+        <a href="#what">What I Do</a>
+        <a href="#results">Results</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow reveal">Performance Marketing for DTC Brands</div>
+          <h1 class="reveal"><span class="grad">I help eCommerce brands scale with precision media buying.</span></h1>
+          <p class="lead reveal">
+            I work with DTC brands that want profitable growth, sharper creative strategy, and media buying that behaves like a commercial engine instead of a gambling addiction.
+          </p>
+          <div class="typed reveal"><span id="typed"></span></div>
+          <div class="cta-row reveal">
+            <a class="btn primary" href="mailto:deej@deejburke.co.za?subject=Let%27s%20work%20together">Contact Me</a>
+            <a class="btn secondary" href="https://www.linkedin.com/in/dylan-deej-burke-8a09a3106" target="_blank" rel="noreferrer">LinkedIn</a>
+          </div>
+          <div class="micro reveal">
+            <div><strong>Based in</strong><br/>Cape Town</div>
+            <div><strong>Focus</strong><br/>DTC and eCommerce Growth</div>
+            <div><strong>Speciality</strong><br/>Meta Ads, Strategy, Conversion Thinking</div>
+          </div>
+        </div>
+        <div class="portrait-card reveal">
+          <img class="portrait" src="headshot.png" alt="Dylan Burke" />
+          <div class="portrait-meta">
+            <div>
+              <h3>Dylan Burke</h3>
+              <p>Performance Marketing Partner</p>
+            </div>
+            <div style="text-align:right;color:var(--muted);font-size:13px;line-height:1.5">
+              Cape Town<br/>South Africa
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="what">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <h2>Built for brands that want growth without the theatre.</h2>
+          <p>
+            I help ambitious consumer brands grow through tighter media buying, better positioning, and creative that actually earns attention. Less noise. More signal. Better decisions.
+          </p>
+        </div>
+        <div class="grid-3">
+          <div class="card reveal">
+            <div class="tag">Media Buying</div>
+            <h3>Precision over spray and pray</h3>
+            <p>I focus on decision-making inside ad accounts, not random acts of budget movement disguised as strategy.</p>
+          </div>
+          <div class="card reveal">
+            <div class="tag">Creative Thinking</div>
+            <h3>Hooks, offers, and positioning</h3>
+            <p>I look at why people buy, not just what button they clicked. Better creative comes from better psychology.</p>
+          </div>
+          <div class="card reveal">
+            <div class="tag">Commercial Growth</div>
+            <h3>Performance tied to the business</h3>
+            <p>Media only matters if it supports margin, demand quality, and long-term growth. Vanity metrics can go to hell.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="results">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <h2>What sits behind the work.</h2>
+          <p>
+            The internet trail says enough: DTC focus, Meta Ads, commercial curiosity, and a pattern of building things rather than talking about building things.
+          </p>
+        </div>
+        <div class="results">
+          <div class="result reveal">
+            <div class="num" data-count="500">0</div>
+            <div class="label">Connections on LinkedIn, with positioning centred on precision media buying and DTC growth.</div>
+          </div>
+          <div class="result reveal">
+            <div class="num" data-count="50">0</div>
+            <div class="label">Podcast episodes under Growing Lean, interviewing operators, founders, and commercial thinkers.</div>
+          </div>
+          <div class="result reveal">
+            <div class="num" data-count="3">0</div>
+            <div class="label">Active venture lanes visible right now: ThirstyBird, Hello Clio, and eCommerce client growth work.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <h2>The through-line.</h2>
+          <p>
+            Strategy, media buying, entrepreneurship, and a taste for understanding why things work. That’s the pattern.
+          </p>
+        </div>
+        <div class="grid-2">
+          <div class="card reveal">
+            <div class="timeline">
+              <div class="t-item">
+                <div class="t-year">Early chapter</div>
+                <h3>Problem-solving instincts showed up early</h3>
+                <p>There’s a thread from robotics and structured thinking into commercial strategy today. Different tools, same wiring.</p>
+              </div>
+              <div class="t-item">
+                <div class="t-year">Marketing phase</div>
+                <h3>Deep focus on DTC and Meta Ads</h3>
+                <p>Public LinkedIn footprint positions the work around helping eCommerce brands scale profitably and precisely.</p>
+              </div>
+              <div class="t-item">
+                <div class="t-year">Current phase</div>
+                <h3>Operator, not just marketer</h3>
+                <p>Current ventures suggest a builder mindset: launch, test, refine, and turn ideas into commercial things that can stand on their own feet.</p>
+              </div>
+            </div>
+          </div>
+          <div class="card reveal">
+            <div class="tag">Current Focus</div>
+            <h3>Where I spend my time now</h3>
+            <p style="margin-bottom:18px">
+              I’m interested in businesses where strong strategy, strong creative, and strong execution compound together.
+            </p>
+            <div class="grid-2" style="grid-template-columns:1fr 1fr;gap:14px">
+              <div style="padding:16px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.02)">
+                <strong style="display:block;margin-bottom:8px">ThirstyBird</strong>
+                <p style="color:var(--muted);line-height:1.7;font-size:14px">A nightlife marketplace designed to make going out more efficient for users and venues.</p>
+              </div>
+              <div style="padding:16px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.02)">
+                <strong style="display:block;margin-bottom:8px">Hello Clio</strong>
+                <p style="color:var(--muted);line-height:1.7;font-size:14px">A Kindle bag concept with strong niche potential and a clean consumer angle.</p>
+              </div>
+              <div style="padding:16px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.02)">
+                <strong style="display:block;margin-bottom:8px">Client Growth</strong>
+                <p style="color:var(--muted);line-height:1.7;font-size:14px">Scaling eCommerce brands across paid social, performance analysis, and sharper commercial positioning.</p>
+              </div>
+              <div style="padding:16px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.02)">
+                <strong style="display:block;margin-bottom:8px">Growing Lean</strong>
+                <p style="color:var(--muted);line-height:1.7;font-size:14px">Conversations with operators and thinkers around growth, business, and commercial decision-making.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head reveal">
+          <h2>Core strengths.</h2>
+          <p>
+            The sharpest operators usually blend analysis, taste, and commercial instinct. That’s the lane here.
+          </p>
+        </div>
+        <div class="grid-2">
+          <div class="card reveal">
+            <div class="skill">
+              <div class="skill-top"><span>Meta Ads</span><span>95%</span></div>
+              <div class="bar"><div class="fill" data-width="95"></div></div>
+            </div>
+            <div class="skill">
+              <div class="skill-top"><span>Shopify / eCommerce</span><span>90%</span></div>
+              <div class="bar"><div class="fill" data-width="90"></div></div>
+            </div>
+            <div class="skill">
+              <div class="skill-top"><span>Commercial Strategy</span><span>88%</span></div>
+              <div class="bar"><div class="fill" data-width="88"></div></div>
+            </div>
+            <div class="skill">
+              <div class="skill-top"><span>Creative Positioning</span><span>84%</span></div>
+              <div class="bar"><div class="fill" data-width="84"></div></div>
+            </div>
+          </div>
+          <div class="card reveal">
+            <div class="quote">
+              I’m interested in the intersection of <span>attention</span>, <span>offer</span>, and <span>commercial reality</span>. Good marketing is not decorative. It changes demand.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <h2>If you're building something worth scaling, get in touch.</h2>
+          <p>
+            Whether it’s paid growth, brand positioning, or a consumer business that needs sharper commercial direction, I’m always open to the right conversation.
+          </p>
+        </div>
+        <div class="grid-2">
+          <a class="card reveal" href="mailto:deej@deejburke.co.za?subject=Let%27s%20work%20together">
+            <div class="tag">Contact</div>
+            <h3>Email Me</h3>
+            <p>deej@deejburke.co.za</p>
+          </a>
+          <a class="card reveal" href="https://www.linkedin.com/in/dylan-deej-burke-8a09a3106" target="_blank" rel="noreferrer">
+            <div class="tag">LinkedIn</div>
+            <h3>Connect Professionally</h3>
+            <p>Dylan Burke — Performance Marketing Partner</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="wrap footer">
+    <strong>Dylan Burke</strong><br/>
+    Performance marketing, commercial growth, and brand building.
+  </div>
+
+  <script>
+    const words = [
+      'Performance Marketing Partner',
+      'DTC Growth Strategist',
+      'Meta Ads Specialist',
+      'Builder of Consumer Businesses'
+    ];
+    const typed = document.getElementById('typed');
+    let wi = 0, ci = 0, deleting = false;
+    function tick() {
+      const current = words[wi];
+      typed.textContent = deleting ? current.slice(0, --ci) : current.slice(0, ++ci);
+      if (!deleting && ci === current.length) {
+        deleting = true;
+        setTimeout(tick, 1100);
+        return;
+      }
+      if (deleting && ci === 0) {
+        deleting = false;
+        wi = (wi + 1) % words.length;
+      }
+      setTimeout(tick, deleting ? 35 : 65);
+    }
+    tick();
+
+    const revealEls = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, { threshold: 0.14 });
+    revealEls.forEach(el => io.observe(el));
+
+    const fills = document.querySelectorAll('.fill');
+    const fio = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          el.style.width = el.dataset.width + '%';
+          fio.unobserve(el);
+        }
+      });
+    }, { threshold: 0.35 });
+    fills.forEach(el => fio.observe(el));
+
+    const nums = document.querySelectorAll('[data-count]');
+    const nio = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const target = parseInt(el.dataset.count, 10);
+        let n = 0;
+        const step = Math.max(1, Math.ceil(target / 42));
+        const timer = setInterval(() => {
+          n += step;
+          if (n >= target) {
+            n = target;
+            clearInterval(timer);
+          }
+          el.textContent = n + (target >= 10 ? '+' : '');
+        }, 26);
+        nio.unobserve(el);
+      });
+    }, { threshold: 0.35 });
+    nums.forEach(el => nio.observe(el));
+
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    function seed() {
+      particles = Array.from({ length: 78 }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.45,
+        vy: (Math.random() - 0.5) * 0.45,
+        r: Math.random() * 1.8 + 0.6
+      }));
+    }
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (const p of particles) {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255,255,255,.32)';
+        ctx.fill();
+      }
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const a = particles[i];
+          const b = particles[j];
+          const dx = a.x - b.x;
+          const dy = a.y - b.y;
+          const d = Math.hypot(dx, dy);
+          if (d < 120) {
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.strokeStyle = `rgba(217,179,108,${0.14 * (1 - d / 120)})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(draw);
+    }
+    window.addEventListener('resize', () => { resize(); seed(); });
+    resize(); seed(); draw();
+  </script>
+</body>
+</html>
