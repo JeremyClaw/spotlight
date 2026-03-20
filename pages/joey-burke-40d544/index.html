@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Joey Burke</title>
+  <meta name="description" content="A ridiculous and funny spotlight page for Joey Burke, auctioneer at Park West." />
+  <style>
+    :root{
+      --bg:#120a08;
+      --bg2:#20100d;
+      --cream:#f7efe6;
+      --muted:#d6c6b7;
+      --gold:#d8a24b;
+      --red:#d94f3d;
+      --blue:#67b3ff;
+      --line:rgba(255,255,255,.12);
+      --card:rgba(255,255,255,.06);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      color:var(--cream);
+      background:radial-gradient(circle at top left, rgba(217,162,75,.18), transparent 26%),radial-gradient(circle at bottom right, rgba(217,79,61,.14), transparent 24%),linear-gradient(180deg,#140a08,#0b0605 100%);
+      overflow-x:hidden;
+    }
+    a{text-decoration:none;color:inherit}
+    canvas{position:fixed;inset:0;pointer-events:none;z-index:0}
+    .wrap{width:min(1180px,calc(100% - 32px));margin:0 auto;position:relative;z-index:1}
+    .nav{position:sticky;top:0;z-index:10;background:rgba(18,10,8,.65);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.05)}
+    .navin{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+    .brand{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-weight:800}
+    .links{display:flex;gap:20px;color:var(--muted);font-size:14px}
+    .hero{min-height:100vh;display:flex;align-items:center;padding:42px 0}
+    .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:26px;align-items:center}
+    .eyebrow{display:inline-flex;padding:10px 14px;border-radius:999px;background:rgba(216,162,75,.12);border:1px solid rgba(216,162,75,.28);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:800;margin-bottom:22px}
+    h1{font-size:clamp(3.2rem,7vw,6.2rem);line-height:.93;letter-spacing:-.05em;margin-bottom:16px}
+    .grad{background:linear-gradient(135deg,#fff 0%, #f9dfb2 45%, #ff9770 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .lead{font-size:clamp(1rem,1.75vw,1.16rem);line-height:1.85;color:var(--muted);max-width:720px}
+    .typed{min-height:26px;margin:22px 0 28px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--gold);font-size:14px}
+    .cta{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{padding:15px 20px;border-radius:14px;font-weight:700;transition:.25s ease;border:1px solid transparent;display:inline-flex;align-items:center;justify-content:center}
+    .btn.primary{background:linear-gradient(135deg,var(--gold),#f6d9a8);color:#130a08;box-shadow:0 18px 50px rgba(216,162,75,.2)}
+    .btn.secondary{background:rgba(255,255,255,.03);border-color:var(--line)}
+    .btn:hover{transform:translateY(-2px)}
+    .hero-card,.card{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.04));border:1px solid var(--line);border-radius:24px;box-shadow:0 24px 70px rgba(0,0,0,.34)}
+    .hero-card{padding:24px;position:relative;overflow:hidden}
+    .hero-card:after{content:"BID!";position:absolute;right:-12px;top:-6px;font-size:92px;font-weight:900;line-height:1;color:rgba(255,255,255,.03);transform:rotate(12deg)}
+    .kicker{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:800;margin-bottom:12px}
+    .hero-card p{color:var(--muted);line-height:1.8}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
+    .stat{padding:16px;border-radius:18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06)}
+    .n{font-size:2rem;font-weight:900;letter-spacing:-.04em}.l{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.14em;margin-top:4px}
+    section{padding:92px 0;border-top:1px solid rgba(255,255,255,.03)}
+    .head{display:flex;justify-content:space-between;gap:24px;align-items:end;margin-bottom:28px}
+    .head h2{font-size:clamp(2rem,4vw,3.2rem);letter-spacing:-.04em;max-width:560px}.head p{max-width:540px;color:var(--muted);line-height:1.8}
+    .grid2,.grid3{display:grid;gap:18px}.grid2{grid-template-columns:repeat(2,1fr)}.grid3{grid-template-columns:repeat(3,1fr)}
+    .card{padding:24px;transition:.25s ease}.card:hover{transform:translateY(-4px);border-color:rgba(216,162,75,.28)}
+    .tag{display:inline-block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:800;margin-bottom:12px}
+    .card h3{font-size:1.12rem;margin-bottom:8px}.card p{color:var(--muted);line-height:1.78}.source{display:block;margin-top:10px;color:#b39a84;font-size:12px}
+    .timeline{position:relative;padding-left:28px;display:grid;gap:22px}.timeline:before{content:"";position:absolute;left:8px;top:0;bottom:0;width:2px;background:linear-gradient(var(--gold),var(--red))}
+    .ti{position:relative;padding-left:8px}.ti:before{content:"";position:absolute;left:-24px;top:7px;width:12px;height:12px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(216,162,75,.12)}
+    .yr{font-size:12px;text-transform:uppercase;letter-spacing:.16em;color:#ffb562;font-weight:800;margin-bottom:6px}
+    .ti h3{margin-bottom:6px}.ti p{color:var(--muted);line-height:1.8}
+    .chaos{position:relative;overflow:hidden}
+    .chaos ul{margin-left:18px}.chaos li{margin-bottom:12px;color:var(--muted);line-height:1.9}
+    .lot-board{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+    .lot{padding:16px;border-radius:18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);text-align:center}
+    .lot strong{display:block;font-size:1.4rem;margin-bottom:6px}
+    .contact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+    .reveal{opacity:0;transform:translateY(24px);transition:all .7s cubic-bezier(.2,.7,.2,1)}.reveal.show{opacity:1;transform:translateY(0)}
+    .footer{padding:48px 0 80px;text-align:center;color:var(--muted)}
+    .marquee{overflow:hidden;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.02)}
+    .marquee-track{display:flex;gap:40px;white-space:nowrap;padding:16px 0;font-weight:800;text-transform:uppercase;letter-spacing:.18em;color:#f1cc90;animation:marquee 28s linear infinite}
+    @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    @media(max-width:940px){.hero-grid,.grid2,.grid3,.contact-grid,.lot-board{grid-template-columns:1fr}.head{flex-direction:column;align-items:start}.links{display:none}.stats{grid-template-columns:1fr}.hero{min-height:auto}}
+  </style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+<div class="nav"><div class="wrap navin"><div class="brand">Joey Burke</div><div class="links"><a href="#dossier">Dossier</a><a href="#story">Story</a><a href="#chaos">Ridiculousness</a><a href="#contact">Contact</a></div></div></div>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow reveal">Auctioneer · Park West · Art, theatre, velocity</div>
+      <h1 class="reveal"><span class="grad">Joey Burke</span></h1>
+      <p class="lead reveal">An auctioneer at Park West, which means — in simple terms — professionally turning paintings, pressure, charm, urgency, crowd psychology, and pure theatre into a full-time occupation. Some people present PowerPoints. Joey apparently presents adrenaline.</p>
+      <div class="typed reveal"><span id="typed"></span></div>
+      <div class="cta reveal">
+        <a class="btn primary" href="https://www.parkwestgallery.com" target="_blank">Park West Gallery</a>
+        <a class="btn secondary" href="#chaos">Skip to the ridiculous part</a>
+      </div>
+    </div>
+    <div class="hero-card reveal">
+      <div class="kicker">Immediate read</div>
+      <p>If you’re an auctioneer at the world’s largest art dealer, you are not just “good with people.” You are effectively part showman, part closer, part art-world ringmaster, and part human caffeine shot. This is not a normal job. Which is precisely why it’s brilliant.</p>
+      <div class="stats">
+        <div class="stat"><div class="n" data-count="3000000">0</div><div class="l">Park West customers</div></div>
+        <div class="stat"><div class="n" data-count="1969">0</div><div class="l">Since</div></div>
+        <div class="stat"><div class="n" data-count="1">0</div><div class="l">Main character energy</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee"><div class="marquee-track">fair warning · this page contains dramatic over-analysis · auctioneer behaviour detected · art, adrenaline, theatre · fair warning · this page contains dramatic over-analysis · auctioneer behaviour detected · art, adrenaline, theatre</div></div>
+
+<section id="dossier">
+  <div class="wrap">
+    <div class="head reveal"><h2>The dossier</h2><p>The public footprint is thin, but honestly, the role itself is already wildly entertaining.</p></div>
+    <div class="grid2">
+      <div class="card reveal"><div class="tag">Verified role</div><h3>Auctioneer at Park West</h3><p>That’s the confirmed target identity here: Joey Burke, associated with Park West in an auctioneering role.</p><span class="source">Source: user-supplied identity confirmation</span></div>
+      <div class="card reveal"><div class="tag">Company scale</div><h3>Park West is not some tiny gallery with a velvet curtain</h3><p>Park West publicly describes itself as the world’s largest art dealer, having introduced more than 3 million customers to art since 1969.</p><span class="source">Source: Park West Gallery website</span></div>
+      <div class="card reveal"><div class="tag">What that implies</div><h3>Not selling art quietly</h3><p>An auctioneer in this environment is somewhere between presenter, closer, entertainer, and licensed chaos merchant. Art may be the product, but energy is part of the mechanism.</p><span class="source">Source: reasoned role inference from public company context</span></div>
+      <div class="card reveal"><div class="tag">Vibe check</div><h3>Professional theatre with a gavel-shaped pulse</h3><p>There are jobs where you try not to attract attention. This is very much not one of them.</p><span class="source">Source: common sense and the basic idea of an auctioneer existing</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="story">
+  <div class="wrap">
+    <div class="head reveal"><h2>The dramatic interpretation</h2><p>Because when the role is auctioneer, understatement would be a crime.</p></div>
+    <div class="timeline">
+      <div class="ti reveal"><div class="yr">Step 1</div><h3>Walk into a room full of humans with money and opinions</h3><p>This is already more dangerous than most office jobs.</p></div>
+      <div class="ti reveal"><div class="yr">Step 2</div><h3>Create energy out of thin air</h3><p>The best auctioneers are not just talking fast. They are manufacturing momentum, confidence, and urgency like a very elegant pressure cooker.</p></div>
+      <div class="ti reveal"><div class="yr">Step 3</div><h3>Turn taste into transactions</h3><p>It’s one thing to appreciate art. It’s another thing entirely to get someone emotionally invested enough to raise a paddle and spend actual money while the room is buzzing.</p></div>
+      <div class="ti reveal"><div class="yr">Step 4</div><h3>Do it all again</h3><p>Which is where Joey’s role becomes objectively hilarious and impressive. Most people would need a lie-down after five minutes of that environment.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="head reveal"><h2>Lot board: what Joey seems to be made of</h2><p>Unofficial, highly dramatic, but spiritually correct.</p></div>
+    <div class="lot-board">
+      <div class="lot reveal"><strong>35%</strong><span>Charisma under pressure</span></div>
+      <div class="lot reveal"><strong>25%</strong><span>Showmanship</span></div>
+      <div class="lot reveal"><strong>20%</strong><span>Reading the room</span></div>
+      <div class="lot reveal"><strong>10%</strong><span>Sales instinct</span></div>
+      <div class="lot reveal"><strong>5%</strong><span>Art-world polish</span></div>
+      <div class="lot reveal"><strong>5%</strong><span>Coffee and audacity</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="chaos">
+  <div class="wrap">
+    <div class="head reveal"><h2>Ridiculous but fair observations</h2><p>You asked for funny. So here we are.</p></div>
+    <div class="card chaos reveal">
+      <ul>
+        <li>Being an <strong>auctioneer</strong> is one of the few careers where talking faster than normal is not a red flag but, in fact, part of the product.</li>
+        <li>If Joey is auctioneering for Park West, then at some point his job has almost certainly involved convincing someone that yes, actually, this is the moment to spend more money in a room full of strangers while adrenaline is doing backflips.</li>
+        <li>Most people say they’re “good under pressure” because they once answered an email quickly. Joey’s pressure probably comes with paddles, tension, applause, and someone silently reconsidering their financial decisions in real time.</li>
+        <li>There is something magnificently theatrical about making art feel urgent. Paintings have been around for a while. Joey’s job is to make the room feel like this one absolutely cannot wait another 14 seconds.</li>
+        <li>Auctioneers are basically sales closers who got tired of normal pacing and decided to add drama, velocity, and a hint of gladiator arena energy.</li>
+        <li>Frankly, if you can control a room, sell a moment, and keep the whole thing elegant, you deserve respect and possibly your own entrance music.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="head reveal"><h2>Where the curtain opens</h2><p>The public route in, not the backstage pass.</p></div>
+    <div class="contact-grid">
+      <a class="card reveal" href="https://www.parkwestgallery.com" target="_blank"><div class="tag">Company</div><h3>Park West Gallery</h3><p>World’s largest art dealer, public-facing home base, and the place where art meets velocity.</p></a>
+      <div class="card reveal"><div class="tag">Status</div><h3>Joey Burke</h3><p>Auctioneer at Park West. The exact kind of role that cannot be faked by someone with weak lungs and poor timing.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap footer">Crafted by Deej</div>
+
+<script>
+const words=['Auctioneer at Park West','Dealer in drama and velocity','Art-world adrenaline technician','Professional room-reader'];
+let wi=0,ci=0,del=false;const typed=document.getElementById('typed');
+function tick(){const cur=words[wi];typed.textContent=del?cur.slice(0,--ci):cur.slice(0,++ci);if(!del&&ci===cur.length){del=true;setTimeout(tick,1000);return}if(del&&ci===0){del=false;wi=(wi+1)%words.length}setTimeout(tick,del?26:58)}tick();
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')}),{threshold:.15});document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+const nums=document.querySelectorAll('[data-count]');const nio=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const el=e.target,target=parseInt(el.dataset.count,10);let n=0;const step=Math.max(1,Math.ceil(target/50));const timer=setInterval(()=>{n+=step;if(n>=target){n=target;clearInterval(timer)}el.textContent=n+(target>=10?'+':'')},18);nio.unobserve(el)}),{threshold:.35});nums.forEach(n=>nio.observe(n));
+const c=document.getElementById('bg'),x=c.getContext('2d');let pts=[];function size(){c.width=innerWidth;c.height=innerHeight}function seed(){pts=Array.from({length:90},()=>({x:Math.random()*c.width,y:Math.random()*c.height,vx:(Math.random()-.5)*.42,vy:(Math.random()-.5)*.42,r:Math.random()*1.7+.6}))}function draw(){x.clearRect(0,0,c.width,c.height);for(const p of pts){p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>c.width)p.vx*=-1;if(p.y<0||p.y>c.height)p.vy*=-1;x.beginPath();x.arc(p.x,p.y,p.r,0,Math.PI*2);x.fillStyle='rgba(255,255,255,.24)';x.fill()}for(let i=0;i<pts.length;i++){for(let j=i+1;j<pts.length;j++){const a=pts[i],b=pts[j],d=Math.hypot(a.x-b.x,a.y-b.y);if(d<120){x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.strokeStyle=`rgba(216,162,75,${0.12*(1-d/120)})`;x.lineWidth=1;x.stroke()}}}requestAnimationFrame(draw)}addEventListener('resize',()=>{size();seed()});size();seed();draw();
+</script>
+</body>
+</html>
