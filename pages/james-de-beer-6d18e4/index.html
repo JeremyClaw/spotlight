@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>James De Beer</title>
+  <meta name="description" content="A tailored editorial spotlight on James De Beer, Director at GES Labs." />
+  <style>
+    :root{
+      --bg:#f4efe8;
+      --paper:#fbf8f3;
+      --ink:#171411;
+      --muted:#6d655d;
+      --accent:#1f5b73;
+      --accent2:#9a5d37;
+      --line:rgba(23,20,17,.12);
+      --shadow:0 20px 60px rgba(23,20,17,.08);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:Georgia,"Times New Roman",serif;background:linear-gradient(180deg,var(--paper),#efe8de 100%);color:var(--ink);overflow-x:hidden}
+    a{text-decoration:none;color:inherit}
+    .wrap{width:min(1180px,calc(100% - 36px));margin:0 auto}
+    .topbar{border-bottom:1px solid var(--line);padding:18px 0;background:rgba(251,248,243,.92);backdrop-filter:blur(6px);position:sticky;top:0;z-index:10}
+    .topin{display:flex;justify-content:space-between;align-items:center}.brand{font-family:Inter,system-ui,sans-serif;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);font-weight:800}.links{display:flex;gap:18px;font-family:Inter,system-ui,sans-serif;font-size:13px;color:var(--muted)}
+    .hero{padding:72px 0 54px;border-bottom:1px solid var(--line)}
+    .eyebrow{font-family:Inter,system-ui,sans-serif;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:800;margin-bottom:18px}
+    h1{font-size:clamp(3.2rem,8vw,7rem);line-height:.9;letter-spacing:-.05em;max-width:900px}
+    .subtitle{margin-top:18px;font-size:clamp(1.05rem,2vw,1.3rem);line-height:1.85;color:var(--muted);max-width:850px}
+    .hero-meta{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;margin-top:38px}
+    .side-note{padding-left:26px;border-left:2px solid var(--accent2);font-size:1.02rem;line-height:1.9;color:#4d453d}
+    .quote-card{background:#fff;border:1px solid var(--line);padding:28px;border-radius:18px;box-shadow:var(--shadow)}
+    .quote-card .k{font-family:Inter,system-ui,sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent2);font-weight:800;margin-bottom:10px}
+    .quote-card p{font-size:1.08rem;line-height:1.85;color:#403932}
+
+    .marquee{overflow:hidden;border-bottom:1px solid var(--line);border-top:1px solid var(--line);background:#f7f2ea}
+    .track{display:flex;gap:34px;white-space:nowrap;padding:14px 0;font-family:Inter,system-ui,sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.24em;color:#7f756c;font-weight:800;animation:move 25s linear infinite}
+    @keyframes move{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+    section{padding:72px 0;border-bottom:1px solid var(--line)}
+    .section-grid{display:grid;grid-template-columns:.75fr 1.25fr;gap:34px;align-items:start}
+    .section-title{font-family:Inter,system-ui,sans-serif;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-weight:800;margin-bottom:14px}
+    .section-intro{font-size:2rem;line-height:1.1;letter-spacing:-.03em;max-width:360px}
+    .body-copy p{font-size:1.08rem;line-height:1.95;color:#403932;margin-bottom:18px}
+
+    .newspaper{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:12px}
+    .clip{background:#fff;border:1px solid var(--line);padding:22px;border-radius:16px;box-shadow:var(--shadow)}
+    .clip .tag{font-family:Inter,system-ui,sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:800;margin-bottom:10px}
+    .clip h3{font-size:1.18rem;line-height:1.35;margin-bottom:10px}
+    .clip p{font-size:1rem;line-height:1.8;color:#4d453d}
+    .clip small{display:block;margin-top:10px;color:#7d7369;font-family:Inter,system-ui,sans-serif;font-size:12px}
+
+    .callout{background:linear-gradient(135deg,#fff,#f8f2e9);border:1px solid var(--line);border-radius:20px;padding:28px;box-shadow:var(--shadow)}
+    .callout h3{font-size:1.4rem;margin-bottom:12px}.callout p{font-size:1.04rem;line-height:1.85;color:#453d36}
+
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+    .list-card{background:#fff;border:1px solid var(--line);padding:24px;border-radius:18px;box-shadow:var(--shadow)}
+    .list-card h3{font-size:1.18rem;margin-bottom:12px}
+    .list-card ul{padding-left:18px}.list-card li{margin-bottom:10px;line-height:1.85;color:#4e463f}
+
+    .finale{padding:90px 0 100px;text-align:center}
+    .finale h2{font-size:clamp(2.5rem,6vw,5rem);line-height:.96;letter-spacing:-.05em;max-width:900px;margin:0 auto 18px}
+    .finale p{max-width:760px;margin:0 auto 28px;font-size:1.1rem;line-height:1.9;color:#5f564e}
+    .btn{display:inline-block;padding:16px 22px;border-radius:999px;border:1px solid var(--ink);font-family:Inter,system-ui,sans-serif;font-weight:700;font-size:14px;transition:.2s;background:#171411;color:#fff}
+    .btn:hover{transform:translateY(-2px);background:#2a241f}
+    .footer{font-family:Inter,system-ui,sans-serif;font-size:13px;color:#7b726a;margin-top:26px}
+
+    .reveal{opacity:0;transform:translateY(22px);transition:all .75s cubic-bezier(.2,.7,.2,1)}
+    .reveal.show{opacity:1;transform:translateY(0)}
+    @media(max-width:980px){.hero-meta,.section-grid,.newspaper,.split{grid-template-columns:1fr}.links{display:none}.section-intro{max-width:none}}
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="wrap topin">
+      <div class="brand">A Short, Unnecessarily Specific Profile</div>
+      <div class="links"><a href="#dossier">Dossier</a><a href="#read">Read</a><a href="#ridiculous">Ridiculous</a><a href="#contact">Contact</a></div>
+    </div>
+  </div>
+
+  <section class="hero">
+    <div class="wrap">
+      <div class="eyebrow reveal">Cape Town • GES Labs • Director</div>
+      <h1 class="reveal">James De Beer looks like the sort of man who can run a lab, hold a room, and quietly know more than everyone else at the table.</h1>
+      <p class="subtitle reveal">That’s always a slightly dangerous combination. Particularly in a world full of people who know just enough jargon to become annoying. James, by contrast, appears to sit in a category that feels more grounded: serious work, technical environment, and enough leadership gravity to not need to shout about it.</p>
+      <div class="hero-meta">
+        <div class="side-note reveal">
+          Publicly, the role anchor is simple enough: <strong>Director at GES Labs</strong>, in Cape Town. But what makes someone interesting is never the title on its own. It is the implication of the title. And in this case the implication is competence, systems, standards, and likely a mild intolerance for nonsense.
+        </div>
+        <div class="quote-card reveal">
+          <div class="k">Immediate Read</div>
+          <p>If you are a director in a technical environment, you are usually doing one of two things: either making order out of chaos, or making sure other people don’t accidentally confuse chaos for strategy. Either way, that tends to produce a certain kind of person. Calm. Precise. And probably a bit allergic to waffle.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee"><div class="track">director energy • laboratory gravity • calm under pressure • likely very little patience for nonsense • director energy • laboratory gravity • calm under pressure • likely very little patience for nonsense</div></div>
+
+  <section id="dossier">
+    <div class="wrap section-grid">
+      <div>
+        <div class="section-title reveal">The Dossier</div>
+        <div class="section-intro reveal">Enough signal to know we’re looking at the right oke, and enough context to build a proper character read.</div>
+      </div>
+      <div class="body-copy">
+        <p class="reveal">The hard identity anchors here are straightforward: <strong>James De Beer</strong>, in <strong>Cape Town</strong>, linked to <strong>GES Labs</strong> in a director role. That is already enough to establish the lane.</p>
+        <p class="reveal">Where it gets interesting is not in pretending we know everything, but in interpreting what a role like that usually demands. Labs do not generally reward chaos merchants. They reward process, standards, judgement, and the ability to be very unimpressed by people who confuse confidence with evidence.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="read">
+    <div class="wrap">
+      <div class="section-title reveal">The Long Read</div>
+      <div class="newspaper">
+        <div class="clip reveal">
+          <div class="tag">Public anchor</div>
+          <h3>Director at GES Labs</h3>
+          <p>The title alone suggests oversight, responsibility, and enough trust placed in him that the operation can’t just drift around hoping for the best.</p>
+          <small>Source: public search anchor</small>
+        </div>
+        <div class="clip reveal">
+          <div class="tag">Interpretation</div>
+          <h3>The opposite of performative intelligence</h3>
+          <p>Technical and operational roles tend to expose bluffers quickly. Which means the people who stay upright in them are often the real thing: less noise, more actual substance.</p>
+          <small>Source: reasoned role interpretation</small>
+        </div>
+        <div class="clip reveal">
+          <div class="tag">Cape Town factor</div>
+          <h3>The local operator profile</h3>
+          <p>Cape Town has a funny way of producing people who can discuss serious things in serious industries while somehow still sounding like they might also know where to get a decent cortado on a Tuesday morning.</p>
+          <small>Source: culture, common sense, and vibes</small>
+        </div>
+        <div class="clip reveal">
+          <div class="tag">Private conclusion</div>
+          <h3>Probably not a man you’d try to bullshit</h3>
+          <p>This is the underlying read. The sort of person who hears a weak explanation and quietly files it under “I see what we’re doing here.”</p>
+          <small>Source: deeply scientific intuition</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap split">
+      <div class="callout reveal">
+        <h3>What the title implies</h3>
+        <p>A director in this context likely sits somewhere between systems thinker, quality guardian, decision-maker, and “the person everyone wants in the room when something important goes slightly sideways.” That is a useful archetype. Also mildly intimidating. Which is often a good sign.</p>
+      </div>
+      <div class="callout reveal">
+        <h3>Why this stands out</h3>
+        <p>Most internet footprints are full of noise. This one is almost more interesting because it isn’t. It leaves just enough for a proper inference: technical seriousness, leadership weight, and the sort of profile that doesn’t need circus tricks to look solid.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="ridiculous">
+    <div class="wrap section-grid">
+      <div>
+        <div class="section-title reveal">Ridiculous, But Fair</div>
+        <div class="section-intro reveal">Because if you’re going to profile someone, you may as well do it with some style.</div>
+      </div>
+      <div class="split">
+        <div class="list-card reveal">
+          <h3>Unfairly tidy assumptions</h3>
+          <ul>
+            <li>James looks like the sort of person who can tell, within 14 seconds, whether someone has actually done the work or is just chatting kak.</li>
+            <li>Being a director at a lab means your tolerance for sloppy thinking is probably lower than the average man’s tolerance for warm beer.</li>
+            <li>There is a strong chance he uses phrases like “show me the evidence” in a way that makes weak people briefly rethink their life choices.</li>
+          </ul>
+        </div>
+        <div class="list-card reveal">
+          <h3>Things this page is quietly suggesting</h3>
+          <ul>
+            <li>Competence without fanfare is always more dangerous than fanfare without competence.</li>
+            <li>Some roles require intelligence. Others require judgment. The good ones require both. This feels like one of those.</li>
+            <li>Any man who can survive technical leadership in Cape Town and still look composed deserves a respectable level of suspicion and admiration.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="finale">
+    <div class="wrap">
+      <h2 class="reveal">If this page made you laugh, good. If it made you feel mildly over-analysed, even better.</h2>
+      <p class="reveal">That was the point. A person is always more interesting than their title. This one just happened to come with enough quiet gravity to make the title interesting too.</p>
+      <a class="btn reveal" href="https://geslabs.com" target="_blank">GES Labs</a>
+      <div class="footer reveal">Crafted by Deej</div>
+    </div>
+  </section>
+
+  <script>
+    const io = new IntersectionObserver(entries => { entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('show'); }); }, { threshold: 0.14 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
+</body>
+</html>
