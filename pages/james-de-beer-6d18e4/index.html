@@ -194,6 +194,52 @@
   <script>
     const io = new IntersectionObserver(entries => { entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('show'); }); }, { threshold: 0.14 });
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.panel).classList.add('active');
+      });
+    });
+
+    document.querySelectorAll('.roast-card').forEach(card => {
+      card.addEventListener('click', () => card.classList.toggle('open'));
+    });
+  </script>
+</body>
+</html>s require judgment. The good ones require both. This feels like one of those.</li>
+            <li>Any man who can survive technical leadership in Cape Town and still look composed deserves a respectable level of suspicion and admiration.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="finale">
+    <div class="wrap">
+      <h2 class="reveal">If this page made you laugh, good. If it made you feel mildly over-analysed, even better.</h2>
+      <p class="reveal">That was the point. A person is always more interesting than their title. This one just happened to come with enough quiet gravity to make the title interesting too.</p>
+      <a class="btn reveal" href="https://geslabs.com" target="_blank">GES Labs</a>
+      <div class="footer reveal">Crafted by Deej</div>
+    </div>
+  </section>
+
+  <script>
+    const io = new IntersectionObserver(entries => { entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('show'); }); }, { threshold: 0.14 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
+</body>
+</html> interesting too.</p>
+      <a class="btn reveal" href="https://geslabs.com" target="_blank">GES Labs</a>
+      <div class="footer reveal">Crafted by Deej</div>
+    </div>
+  </section>
+
+  <script>
+    const io = new IntersectionObserver(entries => { entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('show'); }); }, { threshold: 0.14 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
   </script>
 </body>
 </html>
