@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jessica Pamensky</title>
+  <meta name="description" content="A playful spotlight page for Jessica Pamensky of Anchor Capital." />
+  <style>
+    :root{
+      --bg:#0b0e18;
+      --bg2:#0f1221;
+      --text:#eef0f8;
+      --muted:#a3aac4;
+      --accent:#7c9cff;
+      --accent2:#b8cfff;
+      --gold:#e0b44c;
+      --line:rgba(255,255,255,.1);
+      --card:rgba(255,255,255,.05);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--text);background:radial-gradient(circle at top left,rgba(124,156,255,.16),transparent 26%),radial-gradient(circle at bottom right,rgba(224,180,76,.12),transparent 28%),linear-gradient(180deg,#0a0d16,#060912 100%);overflow-x:hidden}
+    a{text-decoration:none;color:inherit}canvas{position:fixed;inset:0;pointer-events:none;z-index:0}
+    .wrap{width:min(1160px,calc(100% - 32px));margin:0 auto;position:relative;z-index:1}
+    .nav{position:sticky;top:0;z-index:10;background:rgba(11,14,24,.72);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.05)}
+    .navin{display:flex;justify-content:space-between;align-items:center;padding:18px 0}.brand{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-weight:800}.links{display:flex;gap:20px;color:var(--muted);font-size:14px}
+    .hero{min-height:100vh;display:flex;align-items:center;padding:44px 0}.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:26px;align-items:center}
+    .eyebrow{display:inline-flex;padding:10px 14px;border-radius:999px;background:rgba(124,156,255,.1);border:1px solid rgba(124,156,255,.24);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent2);font-weight:800;margin-bottom:22px}
+    h1{font-size:clamp(3.1rem,7vw,6rem);line-height:.94;letter-spacing:-.05em;margin-bottom:16px}.grad{background:linear-gradient(135deg,#fff 0%,#ccdaff 45%,#e0b44c 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .lead{font-size:clamp(1rem,1.8vw,1.16rem);line-height:1.84;color:var(--muted);max-width:730px}.typed{min-height:26px;margin:22px 0 28px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--gold);font-size:14px}
+    .cta{display:flex;gap:12px;flex-wrap:wrap}.btn{padding:15px 20px;border-radius:14px;font-weight:700;transition:.25s ease;border:1px solid transparent;display:inline-flex;align-items:center;justify-content:center}.btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#0a0d16;box-shadow:0 18px 50px rgba(124,156,255,.18)}.btn.secondary{background:rgba(255,255,255,.03);border-color:var(--line)}.btn:hover{transform:translateY(-2px)}
+    .hero-card,.card{background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.03));border:1px solid var(--line);border-radius:24px;box-shadow:0 24px 70px rgba(0,0,0,.32)}.hero-card{padding:24px;position:relative;overflow:hidden}.hero-card:after{content:"📊";position:absolute;right:12px;top:8px;font-size:64px;opacity:.08}
+    .kicker{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:800;margin-bottom:12px}.hero-card p{color:var(--muted);line-height:1.8}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}.stat{padding:16px;border-radius:18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06)}.n{font-size:2rem;font-weight:900;letter-spacing:-.04em}.l{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.14em;margin-top:4px}
+    section{padding:92px 0;border-top:1px solid rgba(255,255,255,.03)}.head{display:flex;justify-content:space-between;gap:24px;align-items:end;margin-bottom:28px}.head h2{font-size:clamp(2rem,4vw,3.2rem);letter-spacing:-.04em;max-width:560px}.head p{max-width:540px;color:var(--muted);line-height:1.8}
+    .grid2,.grid3{display:grid;gap:18px}.grid2{grid-template-columns:repeat(2,1fr)}.grid3{grid-template-columns:repeat(3,1fr)}.card{padding:24px;transition:.25s ease}.card:hover{transform:translateY(-4px);border-color:rgba(124,156,255,.28)}
+    .tag{display:inline-block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:800;margin-bottom:12px}.card h3{font-size:1.12rem;margin-bottom:8px}.card p{color:var(--muted);line-height:1.78}.source{display:block;margin-top:10px;color:#7a849e;font-size:12px}
+    .timeline{position:relative;padding-left:28px;display:grid;gap:22px}.timeline:before{content:"";position:absolute;left:8px;top:0;bottom:0;width:2px;background:linear-gradient(var(--accent),var(--gold))}.ti{position:relative;padding-left:8px}.ti:before{content:"";position:absolute;left:-24px;top:7px;width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(124,156,255,.12)}.yr{font-size:12px;text-transform:uppercase;letter-spacing:.16em;color:var(--accent2);font-weight:800;margin-bottom:6px}.ti h3{margin-bottom:6px}.ti p{color:var(--muted);line-height:1.8}
+    .fun li{margin-left:18px;color:var(--muted);line-height:1.9;margin-bottom:10px}
+    .feed-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.feed{padding:16px;border-radius:18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);text-align:center}.feed strong{display:block;font-size:1.3rem;margin-bottom:6px}
+    .reveal{opacity:0;transform:translateY(24px);transition:all .7s cubic-bezier(.2,.7,.2,1)}.reveal.show{opacity:1;transform:translateY(0)}.footer{padding:48px 0 80px;text-align:center;color:var(--muted)}
+    @media(max-width:940px){.hero-grid,.grid2,.grid3,.feed-grid{grid-template-columns:1fr}.head{flex-direction:column;align-items:start}.links{display:none}.stats{grid-template-columns:1fr}.hero{min-height:auto}}
+  </style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+<div class="nav"><div class="wrap navin"><div class="brand">Jessica Pamensky</div><div class="links"><a href="#dossier">Dossier</a><a href="#story">Story</a><a href="#ridiculous">The Fun Part</a></div></div></div>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow reveal">Cape Town · Anchor Capital · Operations</div>
+      <h1 class="reveal"><span class="grad">Jessica Pamensky</span></h1>
+      <p class="lead reveal">Operations at Anchor Capital — the kind of person who keeps a wealth management firm from descending into the chaos that wealthy people's portfolios would otherwise cause. UCT educated, Cape Town based, and almost certainly better organised than you.</p>
+      <div class="typed reveal"><span id="typed"></span></div>
+      <div class="cta reveal">
+        <a class="btn primary" href="https://anchorcapital.co.za" target="_blank">Visit Anchor Capital</a>
+        <a class="btn secondary" href="#ridiculous">Skip to the fun part</a>
+      </div>
+    </div>
+    <div class="hero-card reveal">
+      <div class="kicker">First impression</div>
+      <p>Operations in wealth management means you're the person who makes sure the money actually goes where it's supposed to go, the reports are right, and the systems don't catch fire — while the portfolio managers get all the credit. It's thankless, essential, and suspiciously similar to being the only sober person at a braai.</p>
+      <div class="stats">
+        <div class="stat"><div class="n">Ops</div><div class="l">The one who actually keeps it running</div></div>
+        <div class="stat"><div class="n">UCT</div><div class="l">Because standards</div></div>
+        <div class="stat"><div class="n">CPT</div><div class="l">Obviously</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="dossier">
+  <div class="wrap">
+    <div class="head reveal"><h2>The dossier</h2><p>Everything publicly available, served with unnecessary commentary.</p></div>
+    <div class="grid2">
+      <div class="card reveal"><div class="tag">Role</div><h3>Operations at Anchor Capital</h3><p>Anchor is one of South Africa's well-regarded wealth and asset management firms — navigating change, managing portfolios, and publishing more research notes than most people read books. Jessica is in Operations, which means she's the engine room while everyone else is on deck pointing at the horizon.</p><span class="source">Source: LinkedIn + anchorcapital.co.za</span></div>
+      <div class="card reveal"><div class="tag">Company</div><h3>Anchor Capital — the SA one</h3><p>Not to be confused with the US Anchor Capital Advisors (est. 1983, Boston). This is the South African firm — wealth management, asset management, private clients, institutional solutions. CEO Peter Armitage. Published research on everything from the SARB's rate decisions to rand forecasts. Basically, they have opinions and charts to back them up.</p><span class="source">Source: anchorcapital.co.za</span></div>
+      <div class="card reveal"><div class="tag">Education</div><h3>University of Cape Town</h3><p>UCT. The one on the mountain. Where you either left feeling intellectually superior or emotionally damaged, and usually both. Jessica chose the intellectually superior route and went into finance ops, which is possibly the most UCT Commerce move possible.</p><span class="source">Source: LinkedIn profile snippet</span></div>
+      <div class="card reveal"><div class="tag">Location</div><h3>Cape Town</h3><p>Based in the city where people pay premium prices for flat whites and Table Mountain views, and somehow still complain about both. Jessica navigates this contradictory ecosystem with the calm of someone who manages operations for a living — which is to say, she's dealt with worse.</p><span class="source">Source: LinkedIn</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="story">
+  <div class="wrap">
+    <div class="head reveal"><h2>What operations actually means</h2><p>A brief explainer for everyone who thinks "ops" is just spreadsheets.</p></div>
+    <div class="grid3">
+      <div class="card reveal"><div class="tag">Reality check</div><h3>The invisible backbone</h3><p>In wealth management, ops is where the actual magic happens. Trade settlements, compliance workflows, client reporting, system integrations, data integrity. If one thing breaks, everyone panics. Jessica's job is to make sure nobody panics.</p></div>
+      <div class="card reveal"><div class="tag">Translation</div><h3>Professional chaos absorber</h3><p>Portfolio managers say "buy". Research says "sell". Compliance says "wait". The client says "why hasn't this happened yet?" Operations is the person in the middle making all of these people feel heard while quietly fixing everything behind the scenes.</p></div>
+      <div class="card reveal"><div class="tag">The truth</div><h3>Anchor would not function without ops</h3><p>This is not flattery, it's just structural reality. You can have the best investment thesis in Africa, but if your operations can't execute, reconcile, report, and comply — you're just a person with opinions and a Bloomberg terminal.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="ridiculous">
+  <div class="wrap">
+    <div class="head reveal"><h2>The fun part</h2><p>Things that are probably true, based on absolutely no hard evidence.</p></div>
+    <div class="grid2">
+      <div class="card reveal"><div class="tag">Hypothesis</div><h3>Jessica has a spreadsheet for her spreadsheets</h3><p>There is a master tracker somewhere — a spreadsheet that tracks all other spreadsheets, colour-coded, with conditional formatting that would make a data engineer weep with joy. It exists. We all know it exists.</p></div>
+      <div class="card reveal"><div class="tag">Hypothesis</div><h3>She has corrected someone's email formatting at least once this week</h3><p>Not in a mean way. In a "I'm helping you be better" way. The kind of correction that makes you feel grateful and slightly ashamed simultaneously.</p></div>
+      <div class="card reveal"><div class="tag">Hypothesis</div><h3>Her out-of-office reply is better than most people's actual emails</h3><p>Clear, warm, informative, with an alternative contact and a return date. No "I'll get back to you when I can." That's amateur hour. Jessica's OOO has structure.</p></div>
+      <div class="card reveal"><div class="tag">Hypothesis</div><h3>She silently judges people who don't label their email subjects properly</h3><p>"Re: Re: Fwd: Re: thing" — absolutely not. Jessica uses clear subject lines and she notices when you don't. She won't say anything. But she notices.</p></div>
+    </div>
+
+    <div style="margin-top:32px">
+      <div class="head reveal"><h2>Anchor vibes check</h2></div>
+      <div class="feed-grid">
+        <div class="feed reveal"><strong>📈</strong>SARB rate decisions? She's already read the note.</div>
+        <div class="feed reveal"><strong>☕</strong>Cape Town flat white game? Strong.</div>
+        <div class="feed reveal"><strong>🗂️</strong>Filing system? Immaculate.</div>
+        <div class="feed reveal"><strong>⛰️</strong>Table Mountain proximity? Unfair advantage.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="head reveal"><h2>The verdict</h2></div>
+    <div class="card reveal" style="max-width:780px">
+      <div class="tag">Summary</div>
+      <h3>The kind of person every company needs but rarely appreciates enough</h3>
+      <p>Jessica Pamensky is in operations at one of SA's most respected wealth management firms, which means she's smart, organised, and has the patience of someone who regularly deals with markets, compliance, and humans — all of which are unpredictable. UCT trained, Cape Town rooted, and almost certainly the reason things at Anchor actually work the way they're supposed to.</p>
+      <p style="margin-top:14px">In short: you want her on your team, you want her systems, and you definitely want to be on the right side of her spreadsheet.</p>
+    </div>
+  </div>
+</section>
+
+<div class="footer"><p>Built with unreasonable attention to detail.</p></div>
+
+<script>
+// Particle canvas
+const c=document.getElementById("bg"),x=c.getContext("2d");let w,h;function sz(){w=c.width=innerWidth;h=c.height=innerHeight}sz();addEventListener("resize",sz);
+const pts=Array.from({length:60},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*1.6+.4,s:Math.random()*.15+.05,o:Math.random()}));
+function draw(){x.clearRect(0,0,w,h);for(const p of pts){p.y-=p.s;p.o+=.003;if(p.y<-10){p.y=h+10;p.x=Math.random()*w}x.beginPath();x.arc(p.x,p.y,p.r,0,Math.PI*2);x.fillStyle=`rgba(124,156,255,${.08+Math.sin(p.o)*.06})`;x.fill()}requestAnimationFrame(draw)}draw();
+
+// Scroll reveal
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("show");obs.unobserve(e.target)}}),{threshold:.08});
+document.querySelectorAll(".reveal").forEach(el=>obs.observe(el));
+
+// Typed effect
+const lines=["Operations. The real MVP.","UCT → Anchor Capital → Running things.","Spreadsheets fear her. Systems respect her.","Cape Town's most organised human? Possibly."];
+let li=0,ci=0,del=false;const el=document.getElementById("typed");
+function type(){if(!el)return;if(!del){el.textContent=lines[li].slice(0,++ci);if(ci===lines[li].length){del=true;setTimeout(type,2200);return}}else{el.textContent=lines[li].slice(0,--ci);if(ci===0){del=false;li=(li+1)%lines.length}}setTimeout(type,del?28:48)}type();
+
+// Count animation
+document.querySelectorAll("[data-count]").forEach(el=>{const t=+el.dataset.count;let c=0;const step=()=>{c+=Math.ceil(t/18);if(c>=t){el.textContent=t;return}el.textContent=c;requestAnimationFrame(step)};const o=new IntersectionObserver(([e])=>{if(e.isIntersecting){step();o.unobserve(el)}},{threshold:.5});o.observe(el)});
+</script>
+</body>
+</html>
